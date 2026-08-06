@@ -24,7 +24,7 @@
 Classification",
       org: "DeepLearning.AI/Coursera",
       date: "28 December 2025",
-      image: "certificates/supervised_learning.ppg"
+      image: "certificates/supervised_machine_learning.ppg"
     },
     // {
     //   id: 2,
