@@ -72,7 +72,7 @@
 
     if (track && marquee) {
         let offset = 0;
-        let speed = 0.9;
+        let speed = 5;
         let direction = 1; // left → right
         let paused = false;
         let isDragging = false;
