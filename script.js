@@ -165,7 +165,7 @@
   if (adminForm) {
     adminForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (document.getElementById("adminPass").value === ADMIN_PASSWORD) {
+      if (document.getElementById("adminPass").value === PVijesh) {
         setAdmin(true);
         closeModal("adminModal");
         if (unlockBtn) unlockBtn.textContent = "Lock admin";
