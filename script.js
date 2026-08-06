@@ -14,7 +14,7 @@
       title: "Fundamentals of Web",
       org: "Google",
       date: "Dec 2024",
-      image: "certificates/web-fundamentals.jpg"
+      
     },
     // {
     //   id: 2,
