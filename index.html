@@ -31,7 +31,6 @@
       </div>
     </section>
 
-    <!-- SKILLS — continuous left → right -->
     <section id="skills">
       <p class="section-label">01 — Skills</p>
       <h2>Technical Skills</h2>
@@ -61,10 +60,7 @@
       <p class="section-sub">Games, ML models, and apps I’ve built.</p>
       <div class="projects-grid">
         <div class="project-card">
-          <div class="project-header">
-            <h3>The Last Day on Earth</h3>
-            <p class="project-date">Jan 2024 – Apr 2024</p>
-          </div>
+          <div class="project-header"><h3>The Last Day on Earth</h3><p class="project-date">Jan 2024 – Apr 2024</p></div>
           <div class="project-content">
             <p>Developed a 3D open-world game featuring dynamic AI and interactive environments. Presented at Poornima University's Prayogam event with recognition for innovation.</p>
             <div class="project-tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">3D Game</span></div>
@@ -72,10 +68,7 @@
         </div>
         <a href="projects\unity-game\index.html" style="text-decoration:none;">
           <div class="project-card">
-            <div class="project-header">
-              <h3>Endless Car Runner</h3>
-              <p class="project-date">Jun 2023 – Aug 2023</p>
-            </div>
+            <div class="project-header"><h3>Endless Car Runner</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
             <div class="project-content">
               <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
               <div class="project-tags"><span class="tag">Unity</span><span class="tag">Gameplay</span><span class="tag">2D Game</span></div>
@@ -84,10 +77,7 @@
         </a>
         <a href="https://vijesh2424-yolo-object-detection.hf.space/" style="text-decoration:none;">
           <div class="project-card">
-            <div class="project-header">
-              <h3>Object Detection</h3>
-              <p class="project-date">Jun 2023 – Aug 2023</p>
-            </div>
+            <div class="project-header"><h3>Object Detection</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
             <div class="project-content">
               <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
               <div class="project-tags"><span class="tag">Unity</span><span class="tag">Gameplay</span><span class="tag">2D Game</span></div>
@@ -95,30 +85,21 @@
           </div>
         </a>
         <div class="project-card">
-          <div class="project-header">
-            <h3>Car Price Prediction Model</h3>
-            <p class="project-date">Sep 2023 – Nov 2023</p>
-          </div>
+          <div class="project-header"><h3>Car Price Prediction Model</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
           <div class="project-content">
             <p>Built a regression model using Python, Pandas, and Scikit-learn to predict used car prices. Achieved 85% improvement in prediction accuracy.</p>
             <div class="project-tags"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Regression</span></div>
           </div>
         </div>
         <div class="project-card">
-          <div class="project-header">
-            <h3>Chess Game</h3>
-            <p class="project-date">Sep 2023 – Nov 2023</p>
-          </div>
+          <div class="project-header"><h3>Chess Game</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
           <div class="project-content">
             <p>Buid a chess game using unity 3D with C# Language</p>
             <div class="project-tags"><span class="tag">Unity</span><span class="tag">Game Development</span><span class="tag">2D Game</span></div>
           </div>
         </div>
         <div class="project-card">
-          <div class="project-header">
-            <h3>Face Recognition System</h3>
-            <p class="project-date">Dec 2023 – Jan 2024</p>
-          </div>
+          <div class="project-header"><h3>Face Recognition System</h3><p class="project-date">Dec 2023 – Jan 2024</p></div>
           <div class="project-content">
             <p>Real-time face recognition system using OpenCV and CNN-based deep learning. Enhanced system speed and accuracy through model optimization.</p>
             <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Deep Learning</span></div>
@@ -131,12 +112,11 @@
     </section>
   </div>
 
-  <!-- CORKBOARD -->
   <div class="board-section" id="certificates">
     <div class="container" style="padding-bottom:0.5rem;">
       <p class="section-label">03 — Case Board</p>
       <h2>Certificates</h2>
-      <p class="section-sub">Click any certificate to view it here — view only, no download.</p>
+      <p class="section-sub">Click any certificate to view — view only, no download.</p>
     </div>
     <div class="container">
       <div class="corkboard">
@@ -182,7 +162,7 @@
     </section>
   </div>
 
-  <!-- Admin password modal -->
+  <!-- Admin password -->
   <div id="adminModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -200,7 +180,7 @@
     </div>
   </div>
 
-  <!-- Add certificate modal (admin only) -->
+  <!-- Add cert: one-click file upload -->
   <div id="addCertModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -221,30 +201,33 @@
           <input type="text" id="certDate" placeholder="e.g. March 2024">
         </div>
         <div class="form-group">
-          <label for="certImage">Certificate image URL</label>
-          <input type="url" id="certImage" required placeholder="https://...png or .jpg">
-          <p class="form-hint">Upload image to Imgur / GitHub / Cloudinary, paste direct image link here.</p>
+          <label>Certificate image</label>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="certFile" accept="image/*">
+            <div class="upload-icon">📁</div>
+            <p>Click to choose image from your computer</p>
+            <p class="file-name" id="fileName"></p>
+            <img class="preview-thumb" id="previewThumb" alt="Preview">
+          </div>
+          <p class="form-hint">PNG / JPG · max ~1.5 MB recommended (stored in this browser)</p>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">Pin to board</button>
+        <button type="submit" class="btn btn-primary" style="width:100%;" id="pinBtn">Pin to board</button>
       </form>
     </div>
   </div>
 
-  <!-- Certificate VIEWER — view only, no download button -->
+  <!-- Viewer: no download -->
   <div id="viewerModal" class="modal viewer-modal">
     <div class="viewer-box">
       <div class="viewer-top">
         <h3 id="viewerTitle">Certificate</h3>
         <button class="close-btn" data-close="viewerModal">×</button>
       </div>
-      <div class="viewer-body" id="viewerBody">
-        <!-- img injected by JS -->
-      </div>
+      <div class="viewer-body" id="viewerBody"></div>
       <div class="viewer-meta" id="viewerMeta"></div>
     </div>
   </div>
 
-  <!-- legacy project modal kept -->
   <div id="addProjectModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
