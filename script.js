@@ -20,10 +20,11 @@
     
     {
       id: 1,
-      title: "Fundamentals of Web",
-      org: "Google",
-      date: "Dec 2024",
-      image: "certificates/web-fundamentals.jpg"
+      title: "Supervised Machine Learning: Regression and
+Classification",
+      org: "DeepLearning.AI/Coursera",
+      date: "28 December 2025",
+      image: "certificates/supervised_learning.ppg"
     },
     // {
     //   id: 2,
