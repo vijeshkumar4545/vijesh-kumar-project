@@ -1,15 +1,41 @@
 (function () {
   "use strict";
 
-  
+  /* =========================================================
+     ADMIN PASSWORD — change if needed
+     ========================================================= */
+  var PVijesh = "vijesh10101010";
+
   var CERT_KEY = "vk_certs_board_v2";
   var ADMIN_KEY = "vk_admin_unlocked";
-  var MAX_IMAGE_SIDE = 1400; // resize large photos before save
+  var MAX_IMAGE_SIDE = 1400;
   var MAX_DATA_MB = 1.8;
+
+  /* =========================================================
+     PUBLIC CERTIFICATES — ye SAB visitors ko dikhenge
+     1) Image files rakho: certificates/your-file.jpg
+     2) Yahan entry add karo
+     ========================================================= */
+  var SITE_CERTS = [
+    
+    {
+      id: 1,
+      title: "Fundamentals of Web",
+      org: "Google",
+      date: "Dec 2024",
+      image: "certificates/web-fundamentals.jpg"
+    },
+    // {
+    //   id: 2,
+    //   title: "AI Fundamentals",
+    //   org: "IBM",
+    //   date: "Jul 2025",
+    //   image: "certificates/ibm-ai.jpg"
+    // }
+  ];
 
   // ----- Scroll reveal -----
   var revealEls = document.querySelectorAll("section, .project-card");
-  var PVijesh = "vijesh10101010";
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -52,7 +78,10 @@
         var t = document.querySelector(id);
         if (t) {
           e.preventDefault();
-          window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: "smooth" });
+          window.scrollTo({
+            top: t.getBoundingClientRect().top + window.pageYOffset - 80,
+            behavior: "smooth"
+          });
         }
       }
     });
@@ -161,6 +190,7 @@
       }
     });
   }
+
   var adminForm = document.getElementById("adminForm");
   if (adminForm) {
     adminForm.addEventListener("submit", function (e) {
@@ -169,7 +199,7 @@
         setAdmin(true);
         closeModal("adminModal");
         if (unlockBtn) unlockBtn.textContent = "Lock admin";
-        alert("Admin unlocked. You can pin & delete certificates.");
+        alert("Admin unlocked.\n\nBrowser upload = draft on this PC only.\nFor everyone: add certs in SITE_CERTS (script.js).");
       } else {
         alert("Wrong password.");
       }
@@ -185,7 +215,7 @@
     });
   }
 
-  // ----- File upload (one click, no URL) -----
+  // ----- File upload (local draft only) -----
   var pendingDataUrl = null;
   var fileInput = document.getElementById("certFile");
   var uploadZone = document.getElementById("uploadZone");
@@ -225,13 +255,12 @@
         ctx.drawImage(img, 0, 0, cw, ch);
         var quality = 0.82;
         var dataUrl = canvas.toDataURL("image/jpeg", quality);
-        // shrink quality if still huge
         while (dataUrl.length > MAX_DATA_MB * 1024 * 1024 && quality > 0.45) {
           quality -= 0.1;
           dataUrl = canvas.toDataURL("image/jpeg", quality);
         }
         if (dataUrl.length > MAX_DATA_MB * 1024 * 1024 * 1.2) {
-          alert("Image is still too large after compress. Try a smaller photo.");
+          alert("Image too large after compress. Use a smaller photo.");
           return;
         }
         cb(dataUrl, file.name);
@@ -257,7 +286,6 @@
         }
       });
     });
-    // drag & drop
     uploadZone.addEventListener("dragover", function (e) {
       e.preventDefault();
       uploadZone.classList.add("dragover");
@@ -281,21 +309,24 @@
     });
   }
 
-  // ----- Certificates store -----
-  var certs = [];
+  // ----- Certificates: SITE_CERTS (public) + local drafts -----
+  var localDrafts = [];
   var rots = [-2.5, 1.8, -1.2, 2.2, -3, 1, -1.8, 2.8];
 
-  function loadCerts() {
-    try { certs = JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); }
-    catch (e) { certs = []; }
+  function loadDrafts() {
+    try { localDrafts = JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); }
+    catch (e) { localDrafts = []; }
   }
-  function saveCerts() {
+  function saveDrafts() {
     try {
-      localStorage.setItem(CERT_KEY, JSON.stringify(certs));
+      localStorage.setItem(CERT_KEY, JSON.stringify(localDrafts));
     } catch (e) {
-      alert("Storage full. Delete an old certificate or use a smaller image.");
+      alert("Storage full. Delete an old draft or use a smaller image.");
       throw e;
     }
+  }
+  function allCerts() {
+    return SITE_CERTS.concat(localDrafts);
   }
   function esc(s) {
     var d = document.createElement("div");
@@ -306,18 +337,22 @@
   function renderCerts() {
     var g = document.getElementById("certsGrid");
     if (!g) return;
-    if (!certs.length) {
-      g.innerHTML = '<p class="board-empty">No certificates pinned yet.</p>';
+    var list = allCerts();
+    if (!list.length) {
+      g.innerHTML = '<p class="board-empty">No certificates pinned yet.<br><small style="opacity:0.8">Add in script.js → SITE_CERTS (visible to everyone)</small></p>';
       return;
     }
-    g.innerHTML = certs.map(function (c, i) {
+    g.innerHTML = list.map(function (c, i) {
+      var isDraft = localDrafts.some(function (d) { return d.id === c.id; });
       return (
         '<div class="cert-note" style="--rot:' + rots[i % rots.length] + 'deg" data-id="' + c.id + '">' +
           '<span class="pin"></span><span class="tape"></span>' +
-          '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '" title="Delete">✕</button>' +
+          (isDraft
+            ? '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '" title="Delete draft">✕</button>'
+            : "") +
           "<h3>" + esc(c.title) + "</h3>" +
           '<p class="cert-org">' + esc(c.org) + "</p>" +
-          '<p class="cert-date">' + esc(c.date || "") + "</p>" +
+          '<p class="cert-date">' + esc(c.date || "") + (isDraft ? " · draft" : "") + "</p>" +
           '<p class="view-hint">Click to view →</p>' +
         "</div>"
       );
@@ -327,7 +362,7 @@
       note.addEventListener("click", function (e) {
         if (e.target.classList.contains("remove-cert")) return;
         var id = Number(note.getAttribute("data-id"));
-        var c = certs.filter(function (x) { return x.id === id; })[0];
+        var c = allCerts().filter(function (x) { return x.id === id; })[0];
         if (c) openViewer(c);
       });
     });
@@ -335,10 +370,10 @@
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
         if (!isAdmin()) return;
-        if (!confirm("Delete this certificate?")) return;
+        if (!confirm("Delete this draft certificate?")) return;
         var id = Number(btn.getAttribute("data-remove"));
-        certs = certs.filter(function (x) { return x.id !== id; });
-        saveCerts();
+        localDrafts = localDrafts.filter(function (x) { return x.id !== id; });
+        saveDrafts();
         renderCerts();
       });
     });
@@ -355,6 +390,9 @@
       img.src = c.image;
       img.alt = c.title || "Certificate";
       img.draggable = false;
+      img.onerror = function () {
+        body.innerHTML = '<p style="color:#c4b59a;padding:2rem;text-align:center;">Image not found.<br>Check path: ' + esc(c.image) + "</p>";
+      };
       body.appendChild(img);
     } else {
       body.innerHTML = '<p style="color:#c4b59a;padding:2rem;text-align:center;">No image for this certificate.</p>';
@@ -367,7 +405,7 @@
     viewerBody.addEventListener("contextmenu", function (e) { e.preventDefault(); });
   }
 
-  loadCerts();
+  loadDrafts();
   renderCerts();
 
   var certForm = document.getElementById("certForm");
@@ -383,7 +421,7 @@
         alert("Please choose a certificate image first.");
         return;
       }
-      certs.push({
+      localDrafts.push({
         id: Date.now(),
         title: title,
         org: org,
@@ -391,15 +429,16 @@
         image: pendingDataUrl
       });
       try {
-        saveCerts();
+        saveDrafts();
       } catch (err) {
-        certs.pop();
+        localDrafts.pop();
         return;
       }
       renderCerts();
       certForm.reset();
       resetUpload();
       closeModal("addCertModal");
+      alert("Saved as local draft (this PC only).\n\nFor all visitors: put image in certificates/ folder and add entry in SITE_CERTS.");
     });
   }
 
