@@ -1,324 +1,328 @@
 (function () {
-    "use strict";
+  "use strict";
 
-    // Sticky header
-    const header = document.querySelector("header");
-    if (header) {
-        const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 20);
-        window.addEventListener("scroll", onScroll, { passive: true });
-        onScroll();
-    }
+  // ===== CONFIG: change your admin password here =====
+  var ADMIN_PASSWORD = "vijesh2024";
+  var CERT_KEY = "vk_certs_board_v1";
+  var ADMIN_KEY = "vk_admin_unlocked";
 
-    // Scroll reveal
-    const revealEls = document.querySelectorAll("section, .project-card, .cert-card");
-    if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const parent = entry.target.parentElement;
-                        if (parent && (parent.classList.contains("projects-grid") || parent.classList.contains("certs-grid"))) {
-                            const siblings = Array.from(parent.children).filter(c => c.classList.contains("project-card") || c.classList.contains("cert-card"));
-                            const idx = siblings.indexOf(entry.target);
-                            if (idx >= 0) entry.target.style.transitionDelay = `${idx * 0.08}s`;
-                        }
-                        entry.target.classList.add("visible");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-        );
-        revealEls.forEach((el) => observer.observe(el));
-    } else {
-        revealEls.forEach((el) => el.classList.add("visible"));
-    }
+  // ===== Scroll reveal =====
+  var revealEls = document.querySelectorAll("section, .project-card");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var parent = e.target.parentElement;
+          if (parent && parent.classList.contains("projects-grid")) {
+            var kids = Array.prototype.slice.call(parent.children);
+            var i = kids.indexOf(e.target);
+            if (i >= 0) e.target.style.transitionDelay = i * 0.07 + "s";
+          }
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("visible"); });
+  }
 
-    // Active nav
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll(".nav-links a[href^='#']");
-    if (sections.length && navLinks.length) {
-        const setActive = () => {
-            let current = "";
-            sections.forEach((sec) => {
-                if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute("id");
-            });
-            navLinks.forEach((link) => {
-                link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
-            });
-        };
-        window.addEventListener("scroll", setActive, { passive: true });
-        setActive();
-    }
-
-    // Smooth anchors
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", (e) => {
-            const id = anchor.getAttribute("href");
-            if (id.length > 1) {
-                const target = document.querySelector(id);
-                if (target) {
-                    e.preventDefault();
-                    const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
-                    window.scrollTo({ top: y, behavior: "smooth" });
-                }
-            }
-        });
+  // ===== Active nav =====
+  var sections = document.querySelectorAll("section[id], #certificates");
+  var navLinks = document.querySelectorAll(".nav-links a[href^='#']");
+  function setActive() {
+    var current = "";
+    sections.forEach(function (s) {
+      if (s.id && window.scrollY >= s.offsetTop - 130) current = s.id;
     });
+    navLinks.forEach(function (l) {
+      l.classList.toggle("active", l.getAttribute("href") === "#" + current);
+    });
+  }
+  window.addEventListener("scroll", setActive, { passive: true });
+  setActive();
 
-    // ========== Skills marquee: continuous left → right ==========
-    const track = document.getElementById("skillsTrack");
-    const marquee = document.querySelector(".skills-marquee");
-
-    if (track && marquee) {
-        let offset = 0;
-        let speed = 5;
-        let direction = 1; // left → right
-        let paused = false;
-        let isDragging = false;
-        let startX = 0;
-        let startOffset = 0;
-        let halfWidth = 0;
-
-        function measure() {
-            const cards = track.querySelectorAll(".skill-card");
-            const half = Math.floor(cards.length / 2);
-            if (half < 1) return;
-            const first = cards[0].getBoundingClientRect();
-            const mid = cards[half].getBoundingClientRect();
-            halfWidth = mid.left - first.left;
-            if (Math.abs(offset) < 1) offset = -halfWidth * 0.12;
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var id = a.getAttribute("href");
+      if (id.length > 1) {
+        var t = document.querySelector(id);
+        if (t) {
+          e.preventDefault();
+          window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: "smooth" });
         }
+      }
+    });
+  });
 
-        measure();
-        window.addEventListener("resize", measure);
-
-        function tick() {
-            if (!paused && !isDragging && halfWidth > 0) {
-                offset += speed * direction;
-                if (direction === 1 && offset >= 0) offset -= halfWidth;
-                else if (direction === -1 && offset <= -halfWidth) offset += halfWidth;
-            }
-            track.style.transform = `translateX(${offset}px)`;
-            requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-
-        marquee.addEventListener("mouseenter", () => { paused = true; });
-        marquee.addEventListener("mouseleave", () => { if (!isDragging) paused = false; });
-
-        function onPointerDown(e) {
-            isDragging = true;
-            paused = true;
-            startX = e.clientX || (e.touches && e.touches[0].clientX);
-            startOffset = offset;
-            marquee.style.cursor = "grabbing";
-        }
-        function onPointerMove(e) {
-            if (!isDragging) return;
-            const x = e.clientX || (e.touches && e.touches[0].clientX);
-            offset = startOffset + (x - startX);
-            while (offset > 0) offset -= halfWidth;
-            while (offset < -halfWidth) offset += halfWidth;
-        }
-        function onPointerUp() {
-            if (!isDragging) return;
-            isDragging = false;
-            paused = false;
-            marquee.style.cursor = "grab";
-        }
-
-        marquee.addEventListener("mousedown", onPointerDown);
-        window.addEventListener("mousemove", onPointerMove);
-        window.addEventListener("mouseup", onPointerUp);
-        marquee.addEventListener("touchstart", onPointerDown, { passive: true });
-        window.addEventListener("touchmove", onPointerMove, { passive: true });
-        window.addEventListener("touchend", onPointerUp);
-
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            paused = true;
-            track.style.transform = "translateX(0)";
-        }
+  // ===== Skills marquee L→R =====
+  var track = document.getElementById("skillsTrack");
+  var marquee = document.getElementById("skillsMarquee");
+  if (track && marquee) {
+    var offset = 0, speed = 0.5, paused = false, dragging = false, startX = 0, startOff = 0, halfW = 0;
+    function measure() {
+      var cards = track.querySelectorAll(".skill-card");
+      var half = Math.floor(cards.length / 2);
+      if (half < 1) return;
+      halfW = cards[half].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+      if (Math.abs(offset) < 1) offset = -halfW * 0.1;
     }
-
-    // Project card 3D tilt
-    if (window.matchMedia("(pointer: fine)").matches) {
-        document.querySelectorAll(".project-card").forEach((card) => {
-            card.addEventListener("mousemove", (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                card.style.transform = `perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg) translateY(-6px)`;
-            });
-            card.addEventListener("mouseleave", () => { card.style.transform = ""; });
-        });
+    measure();
+    window.addEventListener("resize", measure);
+    function tick() {
+      if (!paused && !dragging && halfW > 0) {
+        offset += speed;
+        if (offset >= 0) offset -= halfW;
+      }
+      track.style.transform = "translateX(" + offset + "px)";
+      requestAnimationFrame(tick);
     }
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) requestAnimationFrame(tick);
 
-    // ========== Certificates (localStorage) ==========
-    const CERT_KEY = "vk_certificates";
-    let certificates = [];
-
-    function loadCerts() {
-        try {
-            certificates = JSON.parse(localStorage.getItem(CERT_KEY) || "[]");
-        } catch {
-            certificates = [];
-        }
+    marquee.addEventListener("mouseenter", function () { paused = true; });
+    marquee.addEventListener("mouseleave", function () { if (!dragging) paused = false; });
+    function down(e) {
+      dragging = true; paused = true;
+      startX = e.clientX || (e.touches && e.touches[0].clientX);
+      startOff = offset;
     }
-
-    function saveCerts() {
-        localStorage.setItem(CERT_KEY, JSON.stringify(certificates));
+    function move(e) {
+      if (!dragging) return;
+      var x = e.clientX || (e.touches && e.touches[0].clientX);
+      offset = startOff + (x - startX);
+      while (offset > 0) offset -= halfW;
+      while (offset < -halfW) offset += halfW;
     }
+    function up() { dragging = false; paused = false; }
+    marquee.addEventListener("mousedown", down);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
+    marquee.addEventListener("touchstart", down, { passive: true });
+    window.addEventListener("touchmove", move, { passive: true });
+    window.addEventListener("touchend", up);
+  }
 
-    function escapeHtml(str) {
-        const div = document.createElement("div");
-        div.textContent = str || "";
-        return div.innerHTML;
+  // ===== Admin unlock =====
+  function isAdmin() {
+    return sessionStorage.getItem(ADMIN_KEY) === "1";
+  }
+  function setAdmin(on) {
+    if (on) {
+      sessionStorage.setItem(ADMIN_KEY, "1");
+      document.body.classList.add("is-admin");
+    } else {
+      sessionStorage.removeItem(ADMIN_KEY);
+      document.body.classList.remove("is-admin");
     }
+  }
+  if (isAdmin()) document.body.classList.add("is-admin");
 
-    function renderCerts() {
-        const grid = document.getElementById("certsGrid");
-        if (!grid) return;
+  // Also unlock via ?admin=YOUR_PASSWORD
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("admin") === ADMIN_PASSWORD) setAdmin(true);
+  } catch (e) {}
 
-        if (certificates.length === 0) {
-            grid.innerHTML = '<p class="certs-empty">No certificates yet. Click “Add Certificate” to add one.</p>';
-            return;
-        }
+  function openModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.classList.add("open");
+    m.style.display = "flex";
+  }
+  function closeModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.classList.remove("open");
+    m.style.display = "none";
+  }
 
-        grid.innerHTML = certificates
-            .map(
-                (c) => `
-            <div class="cert-card visible">
-                <button type="button" class="remove-cert" data-id="${c.id}" title="Remove">×</button>
-                <div class="cert-icon">🏆</div>
-                <h3>${escapeHtml(c.title)}</h3>
-                <p class="cert-org">${escapeHtml(c.org)}</p>
-                <p class="cert-date">${escapeHtml(c.date || "")}</p>
-                ${c.link ? `<a class="cert-link" href="${escapeHtml(c.link)}" target="_blank" rel="noopener">View certificate →</a>` : ""}
-            </div>`
-            )
-            .join("");
+  document.querySelectorAll("[data-close]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      closeModal(btn.getAttribute("data-close"));
+    });
+  });
+  document.querySelectorAll(".modal").forEach(function (m) {
+    m.addEventListener("click", function (e) {
+      if (e.target === m) {
+        m.classList.remove("open");
+        m.style.display = "none";
+      }
+    });
+  });
 
-        grid.querySelectorAll(".remove-cert").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const id = Number(btn.getAttribute("data-id"));
-                certificates = certificates.filter((c) => c.id !== id);
-                saveCerts();
-                renderCerts();
-            });
-        });
+  var unlockBtn = document.getElementById("adminUnlockBtn");
+  if (unlockBtn) {
+    unlockBtn.addEventListener("click", function () {
+      if (isAdmin()) {
+        setAdmin(false);
+        unlockBtn.textContent = "Admin unlock";
+        alert("Admin locked.");
+      } else {
+        openModal("adminModal");
+      }
+    });
+  }
+  var adminForm = document.getElementById("adminForm");
+  if (adminForm) {
+    adminForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var pass = document.getElementById("adminPass").value;
+      if (pass === ADMIN_PASSWORD) {
+        setAdmin(true);
+        closeModal("adminModal");
+        if (unlockBtn) unlockBtn.textContent = "Lock admin";
+        alert("Admin unlocked. You can pin certificates.");
+      } else {
+        alert("Wrong password.");
+      }
+    });
+  }
+
+  var openCertBtn = document.getElementById("openCertModal");
+  if (openCertBtn) {
+    openCertBtn.addEventListener("click", function () {
+      if (!isAdmin()) {
+        openModal("adminModal");
+        return;
+      }
+      openModal("addCertModal");
+    });
+  }
+
+  // ===== Certificates =====
+  var certs = [];
+  var rots = [-2.5, 1.8, -1.2, 2.2, -3, 1, -1.8, 2.8];
+
+  function loadCerts() {
+    try { certs = JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); }
+    catch (e) { certs = []; }
+  }
+  function saveCerts() {
+    localStorage.setItem(CERT_KEY, JSON.stringify(certs));
+  }
+  function esc(s) {
+    var d = document.createElement("div");
+    d.textContent = s || "";
+    return d.innerHTML;
+  }
+
+  function renderCerts() {
+    var g = document.getElementById("certsGrid");
+    if (!g) return;
+    if (!certs.length) {
+      g.innerHTML = '<p class="board-empty">No certificates pinned yet.</p>';
+      return;
     }
+    g.innerHTML = certs.map(function (c, i) {
+      return (
+        '<div class="cert-note" style="--rot:' + rots[i % rots.length] + 'deg" data-id="' + c.id + '">' +
+          '<span class="pin"></span><span class="tape"></span>' +
+          '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '">×</button>' +
+          "<h3>" + esc(c.title) + "</h3>" +
+          '<p class="cert-org">' + esc(c.org) + "</p>" +
+          '<p class="cert-date">' + esc(c.date || "") + "</p>" +
+          '<p class="view-hint">Click to view →</p>' +
+        "</div>"
+      );
+    }).join("");
 
-    loadCerts();
-    renderCerts();
+    g.querySelectorAll(".cert-note").forEach(function (note) {
+      note.addEventListener("click", function (e) {
+        if (e.target.classList.contains("remove-cert")) return;
+        var id = Number(note.getAttribute("data-id"));
+        var c = certs.filter(function (x) { return x.id === id; })[0];
+        if (c) openViewer(c);
+      });
+    });
+    g.querySelectorAll("[data-remove]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (!isAdmin()) return;
+        var id = Number(btn.getAttribute("data-remove"));
+        certs = certs.filter(function (x) { return x.id !== id; });
+        saveCerts();
+        renderCerts();
+      });
+    });
+  }
 
-    const certModal = document.getElementById("addCertModal");
-    const openCertBtn = document.getElementById("openCertModal");
-    const closeCertBtn = document.getElementById("closeCertModal");
-    const certForm = document.getElementById("certForm");
-
-    if (openCertBtn && certModal) {
-        openCertBtn.addEventListener("click", () => {
-            certModal.classList.add("open");
-            certModal.style.display = "flex";
-        });
+  function openViewer(c) {
+    document.getElementById("viewerTitle").textContent = c.title || "Certificate";
+    document.getElementById("viewerMeta").textContent =
+      (c.org || "") + (c.date ? " · " + c.date : "") + " · View only";
+    var body = document.getElementById("viewerBody");
+    body.innerHTML = "";
+    if (c.image) {
+      var img = document.createElement("img");
+      img.src = c.image;
+      img.alt = c.title || "Certificate";
+      img.draggable = false;
+      body.appendChild(img);
+    } else {
+      body.innerHTML = '<p style="color:#c4b59a;padding:2rem;text-align:center;">No image linked for this certificate.</p>';
     }
-    if (closeCertBtn && certModal) {
-        closeCertBtn.addEventListener("click", () => {
-            certModal.classList.remove("open");
-            certModal.style.display = "none";
-        });
+    openModal("viewerModal");
+  }
+
+  // Discourage download / context menu on viewer
+  var viewerBody = document.getElementById("viewerBody");
+  if (viewerBody) {
+    viewerBody.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  }
+
+  loadCerts();
+  renderCerts();
+
+  var certForm = document.getElementById("certForm");
+  if (certForm) {
+    certForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!isAdmin()) return;
+      var title = document.getElementById("certTitle").value.trim();
+      var org = document.getElementById("certOrg").value.trim();
+      var date = document.getElementById("certDate").value.trim();
+      var image = document.getElementById("certImage").value.trim();
+      if (!title || !org || !image) return;
+      certs.push({ id: Date.now(), title: title, org: org, date: date, image: image });
+      saveCerts();
+      renderCerts();
+      certForm.reset();
+      closeModal("addCertModal");
+    });
+  }
+
+  // Legacy project helpers
+  window.addProject = function (event) {
+    event.preventDefault();
+    if (!window.customProjects) window.customProjects = [];
+    window.customProjects.push({
+      id: Date.now(),
+      name: document.getElementById("projectName").value,
+      date: document.getElementById("projectDate").value,
+      desc: document.getElementById("projectDesc").value,
+      tech: document.getElementById("projectTech").value.split(",").map(function (t) { return t.trim(); }),
+      link: document.getElementById("projectLink").value
+    });
+    displayCustomProjects();
+    document.getElementById("projectForm").reset();
+    alert("Project added!");
+  };
+  window.displayCustomProjects = function () {
+    var c = document.getElementById("customProjects");
+    if (!c) return;
+    var list = window.customProjects || [];
+    if (!list.length) {
+      c.innerHTML = '<p style="text-align:center;color:var(--muted)">No custom projects</p>';
+      return;
     }
-    if (certModal) {
-        certModal.addEventListener("click", (e) => {
-            if (e.target === certModal) {
-                certModal.classList.remove("open");
-                certModal.style.display = "none";
-            }
-        });
-    }
-    if (certForm) {
-        certForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const title = document.getElementById("certTitle").value.trim();
-            const org = document.getElementById("certOrg").value.trim();
-            const date = document.getElementById("certDate").value.trim();
-            const link = document.getElementById("certLink").value.trim();
-            if (!title || !org) return;
-
-            certificates.push({
-                id: Date.now(),
-                title,
-                org,
-                date,
-                link,
-            });
-            saveCerts();
-            renderCerts();
-            certForm.reset();
-            certModal.classList.remove("open");
-            certModal.style.display = "none";
-        });
-    }
-
-    // Project modal helpers (kept)
-    const projectModal = document.getElementById("addProjectModal");
-    if (projectModal) {
-        window.onclick = function (event) {
-            if (event.target === projectModal) {
-                projectModal.style.display = "none";
-            }
-        };
-    }
-
-    window.addProject = function (event) {
-        event.preventDefault();
-        const projectName = document.getElementById("projectName").value;
-        const projectDate = document.getElementById("projectDate").value;
-        const projectDesc = document.getElementById("projectDesc").value;
-        const projectTech = document.getElementById("projectTech").value;
-        const projectLink = document.getElementById("projectLink").value;
-
-        if (!window.customProjects) window.customProjects = [];
-
-        window.customProjects.push({
-            id: Date.now(),
-            name: projectName,
-            date: projectDate,
-            desc: projectDesc,
-            tech: projectTech.split(",").map((t) => t.trim()),
-            link: projectLink,
-        });
-        displayCustomProjects();
-        document.getElementById("projectForm").reset();
-        alert("✅ Project added successfully!");
-    };
-
-    window.displayCustomProjects = function () {
-        const container = document.getElementById("customProjects");
-        if (!container) return;
-        const list = window.customProjects || [];
-        if (list.length === 0) {
-            container.innerHTML = '<p style="text-align:center;color:var(--text-muted);">No custom projects added yet</p>';
-            return;
-        }
-        container.innerHTML = list
-            .map(
-                (p) => `
-            <div class="project-item">
-                <div>
-                    <strong>${escapeHtml(p.name)}</strong>
-                    <p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.25rem;">${escapeHtml(p.date || "No date")}</p>
-                </div>
-                <button onclick="removeProject(${p.id})">Remove</button>
-            </div>`
-            )
-            .join("");
-    };
-
-    window.removeProject = function (id) {
-        window.customProjects = (window.customProjects || []).filter((p) => p.id !== id);
-        displayCustomProjects();
-        alert("Project removed!");
-    };
+    c.innerHTML = list.map(function (p) {
+      return '<div class="project-item"><div><strong>' + esc(p.name) + "</strong></div>" +
+        '<button onclick="removeProject(' + p.id + ')">Remove</button></div>';
+    }).join("");
+  };
+  window.removeProject = function (id) {
+    window.customProjects = (window.customProjects || []).filter(function (p) { return p.id !== id; });
+    displayCustomProjects();
+  };
 })();
