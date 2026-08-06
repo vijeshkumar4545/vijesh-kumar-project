@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <nav>
             <div class="logo">VK</div>
             <ul class="nav-links">
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="project.html">Projects</a></li>
+                <li><a href="#certificates">Certificates</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -21,48 +21,72 @@
     </header>
 
     <div class="container">
-        <!-- Hero -->
         <section class="hero" id="home">
             <h1>Vijesh Kumar</h1>
-            <p class="subtitle">Aspiring App Developer · Game Development Specialist · ML Enthusiast</p>
+            <p class="subtitle">Aspiring App Developer | Game Development Specialist | ML Enthusiast</p>
             <p class="experience">4+ years experience in Unity Game Development &amp; Android Apps</p>
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-secondary">View Projects</a>
             </div>
         </section>
 
-        <!-- Skills -->
         <section id="skills">
             <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>🎮 Game Development</h3>
-                    <p>Unity, C# scripting, 2D/3D Game Mechanics, Physics Engine, Game UI Design</p>
-                </div>
-                <div class="skill-card">
-                    <h3>📱 App Development</h3>
-                    <p>Android Studio, XML Layouts, Firebase, Java/Kotlin, UI/UX Design</p>
-                </div>
-                <div class="skill-card">
-                    <h3>💻 Web Development</h3>
-                    <p>HTML5, CSS3, JavaScript, Responsive Design, Bootstrap</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🤖 Machine Learning</h3>
-                    <p>Python, NumPy, Pandas, Scikit-learn, OpenCV, CNN, Deep Learning</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🗄️ Databases</h3>
-                    <p>MySQL, SQLite, Database Design &amp; Management</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🛠️ Tools &amp; Platforms</h3>
-                    <p>Git &amp; GitHub, VS Code, Figma, Android Studio, Google Colab</p>
+            <div class="skills-marquee" aria-label="Technical skills scrolling">
+                <div class="skills-track" id="skillsTrack">
+                    <div class="skill-card">
+                        <h3>🎮 Game Development</h3>
+                        <p>Unity, C# scripting, 2D/3D Game Mechanics, Physics Engine, Game UI Design</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>📱 App Development</h3>
+                        <p>Android Studio, XML Layouts, Firebase, Java/Kotlin, UI/UX Design</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>💻 Web Development</h3>
+                        <p>HTML5, CSS3, JavaScript, Responsive Design, Bootstrap</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>🤖 Machine Learning</h3>
+                        <p>Python, NumPy, Pandas, Scikit-learn, OpenCV, CNN, Deep Learning</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>🗄️ Databases</h3>
+                        <p>MySQL, SQLite, Database Design &amp; Management</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>🛠️ Tools &amp; Platforms</h3>
+                        <p>Git &amp; GitHub, VS Code, Figma, Android Studio, Google Colab</p>
+                    </div>
+                    <div class="skill-card" aria-hidden="true">
+                        <h3>🎮 Game Development</h3>
+                        <p>Unity, C# scripting, 2D/3D Game Mechanics, Physics Engine, Game UI Design</p>
+                    </div>
+                    <div class="skill-card" aria-hidden="true">
+                        <h3>📱 App Development</h3>
+                        <p>Android Studio, XML Layouts, Firebase, Java/Kotlin, UI/UX Design</p>
+                    </div>
+                    <div class="skill-card" aria-hidden="true">
+                        <h3>💻 Web Development</h3>
+                        <p>HTML5, CSS3, JavaScript, Responsive Design, Bootstrap</p>
+                    </div>
+                    <div class="skill-card" aria-hidden="true">
+                        <h3>🤖 Machine Learning</h3>
+                        <p>Python, NumPy, Pandas, Scikit-learn, OpenCV, CNN, Deep Learning</p>
+                    </div>
+                    <div class="skill-card" aria-hidden="true">
+                        <h3>🗄️ Databases</h3>
+                        <p>MySQL, SQLite, Database Design &amp; Management</p>
+                    </div>
+                    <div class="skill-card" aria-hidden="true">
+                        <h3>🛠️ Tools &amp; Platforms</h3>
+                        <p>Git &amp; GitHub, VS Code, Figma, Android Studio, Google Colab</p>
+                    </div>
                 </div>
             </div>
+            <p class="skills-hint">Hover to pause · Drag to explore</p>
         </section>
 
-        <!-- Projects -->
         <section id="projects">
             <h2>Featured Projects</h2>
             <div class="projects-grid">
@@ -160,13 +184,21 @@
                     </div>
                 </div>
             </div>
-
             <div class="more-projects">
                 <a href="project.html" class="btn btn-primary">More Projects →</a>
             </div>
         </section>
 
-        <!-- Education -->
+        <section id="certificates">
+            <div class="certs-header">
+                <h2>Certificates</h2>
+                <button type="button" class="btn btn-primary" id="openCertModal">+ Add Certificate</button>
+            </div>
+            <div class="certs-grid" id="certsGrid">
+                <p class="certs-empty">No certificates yet. Click “Add Certificate” to add one.</p>
+            </div>
+        </section>
+
         <section id="education">
             <h2>Education</h2>
             <div class="education-item">
@@ -178,7 +210,6 @@
             </div>
         </section>
 
-        <!-- Contact -->
         <section id="contact">
             <div class="contact-section">
                 <h2>Get In Touch</h2>
@@ -204,7 +235,7 @@
         </section>
     </div>
 
-    <!-- Add Project Modal (unchanged structure) -->
+    <!-- Add Project Modal -->
     <div id="addProjectModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -237,6 +268,35 @@
             <div class="projects-list" id="customProjects">
                 <p style="text-align:center;color:var(--text-muted);">No custom projects added yet</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Add Certificate Modal -->
+    <div id="addCertModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Certificate</h2>
+                <button class="close-btn" id="closeCertModal">×</button>
+            </div>
+            <form id="certForm">
+                <div class="form-group">
+                    <label for="certTitle">Certificate Title</label>
+                    <input type="text" id="certTitle" required placeholder="e.g., Unity Game Development">
+                </div>
+                <div class="form-group">
+                    <label for="certOrg">Issued By</label>
+                    <input type="text" id="certOrg" required placeholder="e.g., Coursera, Udemy">
+                </div>
+                <div class="form-group">
+                    <label for="certDate">Date</label>
+                    <input type="text" id="certDate" placeholder="e.g., March 2024">
+                </div>
+                <div class="form-group">
+                    <label for="certLink">Certificate Link (Optional)</label>
+                    <input type="url" id="certLink" placeholder="https://...">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Add Certificate</button>
+            </form>
         </div>
     </div>
 
