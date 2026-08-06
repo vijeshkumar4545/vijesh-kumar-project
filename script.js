@@ -1,12 +1,13 @@
 (function () {
   "use strict";
 
-  // ===== CONFIG: change your admin password here =====
   var ADMIN_PASSWORD = "vijesh2024";
-  var CERT_KEY = "vk_certs_board_v1";
+  var CERT_KEY = "vk_certs_board_v2";
   var ADMIN_KEY = "vk_admin_unlocked";
+  var MAX_IMAGE_SIDE = 1400; // resize large photos before save
+  var MAX_DATA_MB = 1.8;
 
-  // ===== Scroll reveal =====
+  // ----- Scroll reveal -----
   var revealEls = document.querySelectorAll("section, .project-card");
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -28,7 +29,7 @@
     revealEls.forEach(function (el) { el.classList.add("visible"); });
   }
 
-  // ===== Active nav =====
+  // ----- Nav -----
   var sections = document.querySelectorAll("section[id], #certificates");
   var navLinks = document.querySelectorAll(".nav-links a[href^='#']");
   function setActive() {
@@ -56,7 +57,7 @@
     });
   });
 
-  // ===== Skills marquee L→R =====
+  // ----- Skills marquee L→R -----
   var track = document.getElementById("skillsTrack");
   var marquee = document.getElementById("skillsMarquee");
   if (track && marquee) {
@@ -103,10 +104,8 @@
     window.addEventListener("touchend", up);
   }
 
-  // ===== Admin unlock =====
-  function isAdmin() {
-    return sessionStorage.getItem(ADMIN_KEY) === "1";
-  }
+  // ----- Admin -----
+  function isAdmin() { return sessionStorage.getItem(ADMIN_KEY) === "1"; }
   function setAdmin(on) {
     if (on) {
       sessionStorage.setItem(ADMIN_KEY, "1");
@@ -117,8 +116,6 @@
     }
   }
   if (isAdmin()) document.body.classList.add("is-admin");
-
-  // Also unlock via ?admin=YOUR_PASSWORD
   try {
     var params = new URLSearchParams(window.location.search);
     if (params.get("admin") === ADMIN_PASSWORD) setAdmin(true);
@@ -167,12 +164,11 @@
   if (adminForm) {
     adminForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      var pass = document.getElementById("adminPass").value;
-      if (pass === ADMIN_PASSWORD) {
+      if (document.getElementById("adminPass").value === ADMIN_PASSWORD) {
         setAdmin(true);
         closeModal("adminModal");
         if (unlockBtn) unlockBtn.textContent = "Lock admin";
-        alert("Admin unlocked. You can pin certificates.");
+        alert("Admin unlocked. You can pin & delete certificates.");
       } else {
         alert("Wrong password.");
       }
@@ -182,15 +178,109 @@
   var openCertBtn = document.getElementById("openCertModal");
   if (openCertBtn) {
     openCertBtn.addEventListener("click", function () {
-      if (!isAdmin()) {
-        openModal("adminModal");
-        return;
-      }
+      if (!isAdmin()) { openModal("adminModal"); return; }
+      resetUpload();
       openModal("addCertModal");
     });
   }
 
-  // ===== Certificates =====
+  // ----- File upload (one click, no URL) -----
+  var pendingDataUrl = null;
+  var fileInput = document.getElementById("certFile");
+  var uploadZone = document.getElementById("uploadZone");
+  var fileNameEl = document.getElementById("fileName");
+  var previewThumb = document.getElementById("previewThumb");
+
+  function resetUpload() {
+    pendingDataUrl = null;
+    if (fileInput) fileInput.value = "";
+    if (fileNameEl) fileNameEl.textContent = "";
+    if (previewThumb) {
+      previewThumb.style.display = "none";
+      previewThumb.removeAttribute("src");
+    }
+  }
+
+  function readAndCompress(file, cb) {
+    if (!file || !file.type.match(/^image\//)) {
+      alert("Please choose an image file (PNG/JPG).");
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function (ev) {
+      var img = new Image();
+      img.onload = function () {
+        var w = img.width, h = img.height;
+        var scale = 1;
+        if (w > MAX_IMAGE_SIDE || h > MAX_IMAGE_SIDE) {
+          scale = MAX_IMAGE_SIDE / Math.max(w, h);
+        }
+        var cw = Math.round(w * scale);
+        var ch = Math.round(h * scale);
+        var canvas = document.createElement("canvas");
+        canvas.width = cw;
+        canvas.height = ch;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, cw, ch);
+        var quality = 0.82;
+        var dataUrl = canvas.toDataURL("image/jpeg", quality);
+        // shrink quality if still huge
+        while (dataUrl.length > MAX_DATA_MB * 1024 * 1024 && quality > 0.45) {
+          quality -= 0.1;
+          dataUrl = canvas.toDataURL("image/jpeg", quality);
+        }
+        if (dataUrl.length > MAX_DATA_MB * 1024 * 1024 * 1.2) {
+          alert("Image is still too large after compress. Try a smaller photo.");
+          return;
+        }
+        cb(dataUrl, file.name);
+      };
+      img.onerror = function () { alert("Could not read image."); };
+      img.src = ev.target.result;
+    };
+    reader.onerror = function () { alert("Could not read file."); };
+    reader.readAsDataURL(file);
+  }
+
+  if (uploadZone && fileInput) {
+    uploadZone.addEventListener("click", function () { fileInput.click(); });
+    fileInput.addEventListener("change", function () {
+      var f = fileInput.files && fileInput.files[0];
+      if (!f) return;
+      readAndCompress(f, function (dataUrl, name) {
+        pendingDataUrl = dataUrl;
+        if (fileNameEl) fileNameEl.textContent = name + " ✓ ready";
+        if (previewThumb) {
+          previewThumb.src = dataUrl;
+          previewThumb.style.display = "block";
+        }
+      });
+    });
+    // drag & drop
+    uploadZone.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      uploadZone.classList.add("dragover");
+    });
+    uploadZone.addEventListener("dragleave", function () {
+      uploadZone.classList.remove("dragover");
+    });
+    uploadZone.addEventListener("drop", function (e) {
+      e.preventDefault();
+      uploadZone.classList.remove("dragover");
+      var f = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (!f) return;
+      readAndCompress(f, function (dataUrl, name) {
+        pendingDataUrl = dataUrl;
+        if (fileNameEl) fileNameEl.textContent = name + " ✓ ready";
+        if (previewThumb) {
+          previewThumb.src = dataUrl;
+          previewThumb.style.display = "block";
+        }
+      });
+    });
+  }
+
+  // ----- Certificates store -----
   var certs = [];
   var rots = [-2.5, 1.8, -1.2, 2.2, -3, 1, -1.8, 2.8];
 
@@ -199,7 +289,12 @@
     catch (e) { certs = []; }
   }
   function saveCerts() {
-    localStorage.setItem(CERT_KEY, JSON.stringify(certs));
+    try {
+      localStorage.setItem(CERT_KEY, JSON.stringify(certs));
+    } catch (e) {
+      alert("Storage full. Delete an old certificate or use a smaller image.");
+      throw e;
+    }
   }
   function esc(s) {
     var d = document.createElement("div");
@@ -218,7 +313,7 @@
       return (
         '<div class="cert-note" style="--rot:' + rots[i % rots.length] + 'deg" data-id="' + c.id + '">' +
           '<span class="pin"></span><span class="tape"></span>' +
-          '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '">×</button>' +
+          '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '" title="Delete">✕</button>' +
           "<h3>" + esc(c.title) + "</h3>" +
           '<p class="cert-org">' + esc(c.org) + "</p>" +
           '<p class="cert-date">' + esc(c.date || "") + "</p>" +
@@ -239,6 +334,7 @@
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
         if (!isAdmin()) return;
+        if (!confirm("Delete this certificate?")) return;
         var id = Number(btn.getAttribute("data-remove"));
         certs = certs.filter(function (x) { return x.id !== id; });
         saveCerts();
@@ -250,7 +346,7 @@
   function openViewer(c) {
     document.getElementById("viewerTitle").textContent = c.title || "Certificate";
     document.getElementById("viewerMeta").textContent =
-      (c.org || "") + (c.date ? " · " + c.date : "") + " · View only";
+      (c.org || "") + (c.date ? " · " + c.date : "") + " · View only · no download";
     var body = document.getElementById("viewerBody");
     body.innerHTML = "";
     if (c.image) {
@@ -260,12 +356,11 @@
       img.draggable = false;
       body.appendChild(img);
     } else {
-      body.innerHTML = '<p style="color:#c4b59a;padding:2rem;text-align:center;">No image linked for this certificate.</p>';
+      body.innerHTML = '<p style="color:#c4b59a;padding:2rem;text-align:center;">No image for this certificate.</p>';
     }
     openModal("viewerModal");
   }
 
-  // Discourage download / context menu on viewer
   var viewerBody = document.getElementById("viewerBody");
   if (viewerBody) {
     viewerBody.addEventListener("contextmenu", function (e) { e.preventDefault(); });
@@ -282,12 +377,27 @@
       var title = document.getElementById("certTitle").value.trim();
       var org = document.getElementById("certOrg").value.trim();
       var date = document.getElementById("certDate").value.trim();
-      var image = document.getElementById("certImage").value.trim();
-      if (!title || !org || !image) return;
-      certs.push({ id: Date.now(), title: title, org: org, date: date, image: image });
-      saveCerts();
+      if (!title || !org) return;
+      if (!pendingDataUrl) {
+        alert("Please choose a certificate image first.");
+        return;
+      }
+      certs.push({
+        id: Date.now(),
+        title: title,
+        org: org,
+        date: date,
+        image: pendingDataUrl
+      });
+      try {
+        saveCerts();
+      } catch (err) {
+        certs.pop();
+        return;
+      }
       renderCerts();
       certForm.reset();
+      resetUpload();
       closeModal("addCertModal");
     });
   }
