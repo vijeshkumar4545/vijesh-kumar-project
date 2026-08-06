@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var ADMIN_PASSWORD = "vijesh2024";
+  
   var CERT_KEY = "vk_certs_board_v2";
   var ADMIN_KEY = "vk_admin_unlocked";
   var MAX_IMAGE_SIDE = 1400; // resize large photos before save
@@ -9,6 +9,7 @@
 
   // ----- Scroll reveal -----
   var revealEls = document.querySelectorAll("section, .project-card");
+  var PVijesh = "vijesh10101010";
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -118,7 +119,7 @@
   if (isAdmin()) document.body.classList.add("is-admin");
   try {
     var params = new URLSearchParams(window.location.search);
-    if (params.get("admin") === ADMIN_PASSWORD) setAdmin(true);
+    if (params.get("admin") === PVijesh) setAdmin(true);
   } catch (e) {}
 
   function openModal(id) {
