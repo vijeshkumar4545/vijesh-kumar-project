@@ -26,10 +26,11 @@
   // =====================================================================
   var DEFAULT_CERTS = [
     {
-    id: 1723200000000,
-    title: "Unity Fundamentals",
-    org: "Coursera",
-    date: "March 2024",
+    id: 1,
+    title: "Supervised Machine Learning: Regression and
+Classification",
+    org: "DeepLearning.AI/ Coursera",
+    date: "28 Dec 2025",
     image: "https://example.com/certificate.jpg"
   }
     // 👉 paste new certificate objects here, separated by commas
