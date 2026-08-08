@@ -25,6 +25,13 @@
   // }
   // =====================================================================
   var DEFAULT_CERTS = [
+    {
+    id: 1723200000000,
+    title: "Unity Fundamentals",
+    org: "Coursera",
+    date: "March 2024",
+    image: "https://example.com/certificate.jpg"
+  }
     // 👉 paste new certificate objects here, separated by commas
   ];
 
