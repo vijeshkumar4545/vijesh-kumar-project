@@ -9,7 +9,7 @@
      ========================================================= */
   var DEFAULT_CERTS = [
     // EXAMPLE — delete or edit these and add your real ones:
-//     {
+    {
       id: 1,
       title: "Supervised Machine Learning: Regression and Classification",
       org: "Coursera/DeepLearning.AI/Stanford",
