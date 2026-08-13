@@ -9,21 +9,21 @@
      ========================================================= */
   var DEFAULT_CERTS = [
     // EXAMPLE — delete or edit these and add your real ones:
-    {
-      id: 1,
-      title: "Supervised Machine Learning: Regression and
-Classification",
-      org: "Coursera/DeepLearning.AI/Stanford",
-      date: "28 Dec 2025",
-      image: "certificates/supervised_machine_learning.png"
-    },
-    {
-      id: 2,
-      title: "AI Fundamentals",
-      org: "IBM",
-      date: "Jul 2025",
-      image: "certificates/ai-fundamentals.jpg"
-    }
+//     {
+//       id: 1,
+//       title: "Supervised Machine Learning: Regression and
+// Classification",
+//       org: "Coursera/DeepLearning.AI/Stanford",
+//       date: "28 Dec 2025",
+//       image: "certificates/supervised_machine_learning.png"
+//     },
+//     {
+//       id: 2,
+//       title: "AI Fundamentals",
+//       org: "IBM",
+//       date: "Jul 2025",
+//       image: "certificates/ai-fundamentals.jpg"
+//     }
   ];
 
   var ADMIN_PASSWORD = "vijesh10101010"; // change this
