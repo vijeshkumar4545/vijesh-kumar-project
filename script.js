@@ -1,48 +1,38 @@
 (function () {
   "use strict";
 
-  // =====================================================================
-  // DEFAULT_CERTS — this is the PERMANENT, SHARED certificate list.
-  // Everyone who visits the site sees exactly what's in this array,
-  // because it ships as part of the code (not saved in a visitor's browser).
-  //
-  // HOW TO ADD A CERTIFICATE PERMANENTLY (manual / code way):
-  //   1. Use the "+ Pin Certificate" admin form as normal (it will still
-  //      preview locally in YOUR browser only).
-  //   2. After pinning, a "Copy code" box will pop up with a ready-made
-  //      object like the example below.
-  //   3. Paste that object into this DEFAULT_CERTS array (below), then
-  //      save script.js and re-upload/push the site.
-  //   4. Now it's part of the code itself, so it shows for every visitor.
-  //
-  // Example entry:
-  // {
-  //   id: 1710000000000,
-  //   title: "Unity Fundamentals",
-  //   org: "Coursera",
-  //   date: "March 2024",
-  //   image: "data:image/jpeg;base64,....."   // or a normal image URL
-  // }
-  // =====================================================================
+  /* =========================================================
+     PUBLIC CERTIFICATES — everyone sees these
+     1. Put image files in folder:  certificates/your-file.jpg
+     2. Add one object below for each certificate
+     3. image path must match the file name
+     ========================================================= */
   var DEFAULT_CERTS = [
-    {
-    id: 1,
-    title: "Supervised Machine Learning: Regression and
-Classification",
-    org: "DeepLearning.AI/ Coursera",
-    date: "28 Dec 2025",
-    image: "https://example.com/certificate.jpg"
-  }
-    // 👉 paste new certificate objects here, separated by commas
+    // EXAMPLE — delete or edit these and add your real ones:
+    // {
+    //   id: 1,
+    //   title: "Fundamentals of Web",
+    //   org: "Google",
+    //   date: "Dec 2024",
+    //   image: "certificates/fundamentals-of-web.jpg"
+    // },
+    // {
+    //   id: 2,
+    //   title: "AI Fundamentals",
+    //   org: "IBM",
+    //   date: "Jul 2025",
+    //   image: "certificates/ai-fundamentals.jpg"
+    // }
   ];
 
+  var ADMIN_PASSWORD = "vijesh10101010"; // change this
   var CERT_KEY = "vk_certs_board_v2";
   var ADMIN_KEY = "vk_admin_unlocked";
-  var MAX_IMAGE_SIDE = 1400; // resize large photos before save
+  var MAX_IMAGE_SIDE = 1400;
   var MAX_DATA_MB = 1.8;
+
   // ----- Scroll reveal -----
   var revealEls = document.querySelectorAll("section, .project-card");
-  var PVijesh = "vijesh10101010";
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -62,6 +52,7 @@ Classification",
   } else {
     revealEls.forEach(function (el) { el.classList.add("visible"); });
   }
+
   // ----- Nav -----
   var sections = document.querySelectorAll("section[id], #certificates");
   var navLinks = document.querySelectorAll(".nav-links a[href^='#']");
@@ -76,6 +67,7 @@ Classification",
   }
   window.addEventListener("scroll", setActive, { passive: true });
   setActive();
+
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id = a.getAttribute("href");
@@ -83,16 +75,21 @@ Classification",
         var t = document.querySelector(id);
         if (t) {
           e.preventDefault();
-          window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: "smooth" });
+          window.scrollTo({
+            top: t.getBoundingClientRect().top + window.pageYOffset - 80,
+            behavior: "smooth"
+          });
         }
       }
     });
   });
+
   // ----- Skills marquee L→R -----
   var track = document.getElementById("skillsTrack");
   var marquee = document.getElementById("skillsMarquee");
   if (track && marquee) {
-    var offset = 0, speed = 0.5, paused = false, dragging = false, startX = 0, startOff = 0, halfW = 0;
+    var offset = 0, speed = 0.5, paused = false, dragging = false;
+    var startX = 0, startOff = 0, halfW = 0;
     function measure() {
       var cards = track.querySelectorAll(".skill-card");
       var half = Math.floor(cards.length / 2);
@@ -110,7 +107,9 @@ Classification",
       track.style.transform = "translateX(" + offset + "px)";
       requestAnimationFrame(tick);
     }
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) requestAnimationFrame(tick);
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      requestAnimationFrame(tick);
+    }
     marquee.addEventListener("mouseenter", function () { paused = true; });
     marquee.addEventListener("mouseleave", function () { if (!dragging) paused = false; });
     function down(e) {
@@ -133,6 +132,7 @@ Classification",
     window.addEventListener("touchmove", move, { passive: true });
     window.addEventListener("touchend", up);
   }
+
   // ----- Admin -----
   function isAdmin() { return sessionStorage.getItem(ADMIN_KEY) === "1"; }
   function setAdmin(on) {
@@ -147,8 +147,9 @@ Classification",
   if (isAdmin()) document.body.classList.add("is-admin");
   try {
     var params = new URLSearchParams(window.location.search);
-    if (params.get("admin") === PVijesh) setAdmin(true);
+    if (params.get("admin") === ADMIN_PASSWORD) setAdmin(true);
   } catch (e) {}
+
   function openModal(id) {
     var m = document.getElementById(id);
     if (!m) return;
@@ -161,6 +162,7 @@ Classification",
     m.classList.remove("open");
     m.style.display = "none";
   }
+
   document.querySelectorAll("[data-close]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       closeModal(btn.getAttribute("data-close"));
@@ -174,6 +176,7 @@ Classification",
       }
     });
   });
+
   var unlockBtn = document.getElementById("adminUnlockBtn");
   if (unlockBtn) {
     unlockBtn.addEventListener("click", function () {
@@ -190,16 +193,17 @@ Classification",
   if (adminForm) {
     adminForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (document.getElementById("adminPass").value === PVijesh) {
+      if (document.getElementById("adminPass").value === ADMIN_PASSWORD) {
         setAdmin(true);
         closeModal("adminModal");
         if (unlockBtn) unlockBtn.textContent = "Lock admin";
-        alert("Admin unlocked. You can pin & delete certificates.");
+        alert("Admin unlocked.");
       } else {
         alert("Wrong password.");
       }
     });
   }
+
   var openCertBtn = document.getElementById("openCertModal");
   if (openCertBtn) {
     openCertBtn.addEventListener("click", function () {
@@ -208,12 +212,14 @@ Classification",
       openModal("addCertModal");
     });
   }
-  // ----- File upload (one click, no URL) -----
+
+  // ----- File upload (preview only on this PC — for permanent use code method) -----
   var pendingDataUrl = null;
   var fileInput = document.getElementById("certFile");
   var uploadZone = document.getElementById("uploadZone");
   var fileNameEl = document.getElementById("fileName");
   var previewThumb = document.getElementById("previewThumb");
+
   function resetUpload() {
     pendingDataUrl = null;
     if (fileInput) fileInput.value = "";
@@ -223,6 +229,7 @@ Classification",
       previewThumb.removeAttribute("src");
     }
   }
+
   function readAndCompress(file, cb) {
     if (!file || !file.type.match(/^image\//)) {
       alert("Please choose an image file (PNG/JPG).");
@@ -246,13 +253,12 @@ Classification",
         ctx.drawImage(img, 0, 0, cw, ch);
         var quality = 0.82;
         var dataUrl = canvas.toDataURL("image/jpeg", quality);
-        // shrink quality if still huge
         while (dataUrl.length > MAX_DATA_MB * 1024 * 1024 && quality > 0.45) {
           quality -= 0.1;
           dataUrl = canvas.toDataURL("image/jpeg", quality);
         }
         if (dataUrl.length > MAX_DATA_MB * 1024 * 1024 * 1.2) {
-          alert("Image is still too large after compress. Try a smaller photo.");
+          alert("Image still too large. Try a smaller photo.");
           return;
         }
         cb(dataUrl, file.name);
@@ -263,6 +269,7 @@ Classification",
     reader.onerror = function () { alert("Could not read file."); };
     reader.readAsDataURL(file);
   }
+
   if (uploadZone && fileInput) {
     uploadZone.addEventListener("click", function () { fileInput.click(); });
     fileInput.addEventListener("change", function () {
@@ -277,7 +284,6 @@ Classification",
         }
       });
     });
-    // drag & drop
     uploadZone.addEventListener("dragover", function (e) {
       e.preventDefault();
       uploadZone.classList.add("dragover");
@@ -300,53 +306,54 @@ Classification",
       });
     });
   }
-  // ----- Certificates store -----
-  // certs = DEFAULT_CERTS (shared, permanent, ships with the code)
-  //         + anything pinned locally in THIS browser (preview only,
-  //         marked with local:true, and NOT visible to other visitors
-  //         until you copy its code into DEFAULT_CERTS above).
-  var certs = [];
+
+  // ----- Certificates -----
+  // Public list = DEFAULT_CERTS (in code, visible to everyone)
+  // localStorage extras = only visible on this browser (admin testing)
+  var localCerts = [];
   var rots = [-2.5, 1.8, -1.2, 2.2, -3, 1, -1.8, 2.8];
-  function loadLocalCerts() {
-    try { return JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); }
-    catch (e) { return []; }
+
+  function loadLocal() {
+    try { localCerts = JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); }
+    catch (e) { localCerts = []; }
   }
-  function loadCerts() {
-    var local = loadLocalCerts().map(function (c) {
-      c.local = true;
-      return c;
-    });
-    // avoid duplicate ids if a local one was later baked into DEFAULT_CERTS
-    var defaultIds = DEFAULT_CERTS.map(function (c) { return c.id; });
-    local = local.filter(function (c) { return defaultIds.indexOf(c.id) === -1; });
-    certs = DEFAULT_CERTS.concat(local);
-  }
-  function saveLocalCerts(localOnly) {
+  function saveLocal() {
     try {
-      localStorage.setItem(CERT_KEY, JSON.stringify(localOnly));
+      localStorage.setItem(CERT_KEY, JSON.stringify(localCerts));
     } catch (e) {
-      alert("Storage full. Delete an old certificate or use a smaller image.");
+      alert("Storage full. Use the permanent method (images folder + DEFAULT_CERTS).");
       throw e;
     }
   }
+
+  function allCerts() {
+    // Everyone always sees DEFAULT_CERTS
+    // Admin also sees localStorage pins on this PC
+    return DEFAULT_CERTS.concat(localCerts);
+  }
+
   function esc(s) {
     var d = document.createElement("div");
     d.textContent = s || "";
     return d.innerHTML;
   }
+
   function renderCerts() {
     var g = document.getElementById("certsGrid");
     if (!g) return;
-    if (!certs.length) {
-      g.innerHTML = '<p class="board-empty">No certificates pinned yet.</p>';
+    var list = allCerts();
+    if (!list.length) {
+      g.innerHTML = '<p class="board-empty">No certificates yet. Add them in script.js → DEFAULT_CERTS (see README note).</p>';
       return;
     }
-    g.innerHTML = certs.map(function (c, i) {
+    g.innerHTML = list.map(function (c, i) {
+      var isLocal = localCerts.some(function (x) { return x.id === c.id; });
       return (
-        '<div class="cert-note" style="--rot:' + rots[i % rots.length] + 'deg" data-id="' + c.id + '">' +
+        '<div class="cert-note" style="--rot:' + rots[i % rots.length] + 'deg" data-id="' + c.id + '" data-local="' + (isLocal ? "1" : "0") + '">' +
           '<span class="pin"></span><span class="tape"></span>' +
-          (c.local ? '<span class="local-badge admin-only" title="Only visible in this browser until added to code">LOCAL PREVIEW</span>' : '') +
-          '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '" title="Delete">✕</button>' +
+          (isLocal
+            ? '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '" title="Delete">✕</button>'
+            : "") +
           "<h3>" + esc(c.title) + "</h3>" +
           '<p class="cert-org">' + esc(c.org) + "</p>" +
           '<p class="cert-date">' + esc(c.date || "") + "</p>" +
@@ -354,11 +361,12 @@ Classification",
         "</div>"
       );
     }).join("");
+
     g.querySelectorAll(".cert-note").forEach(function (note) {
       note.addEventListener("click", function (e) {
         if (e.target.classList.contains("remove-cert")) return;
         var id = Number(note.getAttribute("data-id"));
-        var c = certs.filter(function (x) { return x.id === id; })[0];
+        var c = allCerts().filter(function (x) { return x.id === id; })[0];
         if (c) openViewer(c);
       });
     });
@@ -366,15 +374,15 @@ Classification",
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
         if (!isAdmin()) return;
-        if (!confirm("Delete this certificate? (Only removes it from your local preview / from DEFAULT_CERTS you'll still need to edit code for permanent ones.)")) return;
+        if (!confirm("Delete this local certificate?")) return;
         var id = Number(btn.getAttribute("data-remove"));
-        var localOnly = loadLocalCerts().filter(function (x) { return x.id !== id; });
-        saveLocalCerts(localOnly);
-        loadCerts();
+        localCerts = localCerts.filter(function (x) { return x.id !== id; });
+        saveLocal();
         renderCerts();
       });
     });
   }
+
   function openViewer(c) {
     document.getElementById("viewerTitle").textContent = c.title || "Certificate";
     document.getElementById("viewerMeta").textContent =
@@ -392,55 +400,14 @@ Classification",
     }
     openModal("viewerModal");
   }
+
   var viewerBody = document.getElementById("viewerBody");
   if (viewerBody) {
     viewerBody.addEventListener("contextmenu", function (e) { e.preventDefault(); });
   }
-  loadCerts();
-  renderCerts();
 
-  // ----- Code export modal (for making a cert permanent/shared) -----
-  function buildCertCode(c) {
-    return "{\n" +
-      "  id: " + c.id + ",\n" +
-      "  title: " + JSON.stringify(c.title) + ",\n" +
-      "  org: " + JSON.stringify(c.org) + ",\n" +
-      "  date: " + JSON.stringify(c.date || "") + ",\n" +
-      "  image: " + JSON.stringify(c.image) + "\n" +
-      "},";
-  }
-  function showExportBox(code) {
-    var overlay = document.createElement("div");
-    overlay.className = "modal open";
-    overlay.style.display = "flex";
-    overlay.innerHTML =
-      '<div class="modal-content" style="max-width:560px;">' +
-        '<div class="modal-header"><h2>Copy code — make it permanent</h2>' +
-        '<button class="close-btn" id="exportCloseBtn">×</button></div>' +
-        '<p class="form-hint" style="margin-bottom:0.6rem;">Paste this object inside the <code>DEFAULT_CERTS = [ ... ]</code> array near the top of script.js, then save &amp; re-upload the site. It will then show for every visitor, not just this browser.</p>' +
-        '<textarea id="exportCodeArea" readonly style="width:100%;min-height:180px;background:#0c0c0e;color:#f2f0eb;border:1px solid #2a2a32;border-radius:8px;padding:0.6rem;font-family:monospace;font-size:0.78rem;"></textarea>' +
-        '<button type="button" class="btn btn-primary" id="exportCopyBtn" style="width:100%;margin-top:0.75rem;">Copy code</button>' +
-      '</div>';
-    document.body.appendChild(overlay);
-    var area = overlay.querySelector("#exportCodeArea");
-    area.value = code;
-    overlay.querySelector("#exportCloseBtn").addEventListener("click", function () {
-      document.body.removeChild(overlay);
-    });
-    overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) document.body.removeChild(overlay);
-    });
-    overlay.querySelector("#exportCopyBtn").addEventListener("click", function () {
-      area.select();
-      area.setSelectionRange(0, 999999);
-      try {
-        navigator.clipboard.writeText(area.value);
-        overlay.querySelector("#exportCopyBtn").textContent = "Copied ✓";
-      } catch (e) {
-        document.execCommand("copy");
-      }
-    });
-  }
+  loadLocal();
+  renderCerts();
 
   var certForm = document.getElementById("certForm");
   if (certForm) {
@@ -455,28 +422,44 @@ Classification",
         alert("Please choose a certificate image first.");
         return;
       }
-      var newCert = {
+      // Local pin (only this browser) + show how to make permanent
+      var entry = {
         id: Date.now(),
         title: title,
         org: org,
         date: date,
         image: pendingDataUrl
       };
-      var localOnly = loadLocalCerts();
-      localOnly.push(newCert);
+      localCerts.push(entry);
       try {
-        saveLocalCerts(localOnly);
+        saveLocal();
       } catch (err) {
+        localCerts.pop();
         return;
       }
-      loadCerts();
       renderCerts();
       certForm.reset();
       resetUpload();
       closeModal("addCertModal");
-      showExportBox(buildCertCode(newCert));
+
+      alert(
+        "Pinned on THIS computer only.\n\n" +
+        "To show it to EVERYONE permanently:\n" +
+        "1. Save the certificate image into folder: certificates/\n" +
+        "   e.g. certificates/" + title.replace(/\s+/g, "-").toLowerCase() + ".jpg\n" +
+        "2. Open script.js and add inside DEFAULT_CERTS:\n\n" +
+        "{\n" +
+        "  id: " + entry.id + ",\n" +
+        "  title: \"" + title.replace(/"/g, '\\"') + "\",\n" +
+        "  org: \"" + org.replace(/"/g, '\\"') + "\",\n" +
+        "  date: \"" + date.replace(/"/g, '\\"') + "\",\n" +
+        "  image: \"certificates/your-file-name.jpg\"\n" +
+        "}\n\n" +
+        "Then upload the website files again (with the certificates folder)."
+      );
     });
   }
+
   // Legacy project helpers
   window.addProject = function (event) {
     event.preventDefault();
