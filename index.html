@@ -1,411 +1,739 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vijesh Kumar - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vijesh Kumar - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">VK</div>
-            <ul class="nav-links">
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="project.html">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <!-- Hero Section -->
-    <div class="container">
-        <section class="hero">
-            <h1>Vijesh Kumar</h1>
-            <p>Aspiring App Developer | Game Development Specialist | ML Enthusiast</p>
-            <p style="font-size: 1rem; color: var(--text-secondary);">4+ years experience in Unity Game Development & Android Apps</p>
-            <div class="cta-buttons">
-             
-                <a href="#projects" class="btn btn-secondary">View Projects</a>
-            </div>
-        </section>
-        <!-- Skills Section -->
-        <section id="skills">
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>🎮 Game Development</h3>
-                    <p>Unity, C# scripting, 2D/3D Game Mechanics, Physics Engine, Game UI Design</p>
-                </div>
-                <div class="skill-card">
-                    <h3>📱 App Development</h3>
-                    <p>Android Studio, XML Layouts, Firebase, Java/Kotlin, UI/UX Design</p>
-                </div>
-                <div class="skill-card">
-                    <h3>💻 Web Development</h3>
-                    <p>HTML5, CSS3, JavaScript, Responsive Design, Bootstrap</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🤖 Machine Learning</h3>
-                    <p>Python, NumPy, Pandas, Scikit-learn, OpenCV, CNN, Deep Learning</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🗄️ Databases</h3>
-                    <p>MySQL, SQLite, Database Design & Management</p>
-                </div>
-                <div class="skill-card">
-                    <h3>🛠️ Tools & Platforms</h3>
-                    <p>Git & GitHub, VS Code, Figma, Android Studio, Google Colab</p>
-                </div>
-            </div>
-        </section>
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2>Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>The Last Day on Earth</h3>
-                        <p class="project-date">Jan 2024 – Apr 2024</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Developed a 3D open-world game featuring dynamic AI and interactive environments. Presented at Poornima University's Prayogam event with recognition for innovation.</p>
-                        <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">C#</span>
-                            <span class="tag">3D Game</span>
-                        </div>
-                    </div>
-                </div>
-                <a href="projects\unity-game\index.html" style="text-decoration: none;">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Endless Car Runner</h3>
-                        <p class="project-date">Jun 2023 – Aug 2023</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
-                        <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">Gameplay</span>
-                            <span class="tag">2D Game</span>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <a href="https://vijesh2424-yolo-object-detection.hf.space/" style="text-decoration: none;">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Object Detection</h3>
-                        <p class="project-date">Jun 2023 – Aug 2023</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
-                        <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">Gameplay</span>
-                            <span class="tag">2D Game</span>
-                        </div>
-                    </div>
-                </div>
-                </a>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Car Price Prediction Model</h3>
-                        <p class="project-date">Sep 2023 – Nov 2023</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Built a regression model using Python, Pandas, and Scikit-learn to predict used car prices. Achieved 85% improvement in prediction accuracy.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Machine Learning</span>
-                            <span class="tag">Regression</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Chess Game</h3>
-                        <p class="project-date">Sep 2023 – Nov 2023</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Buid a chess game using unity 3D with C# Language</p>
-                        <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">Game Development</span>
-                            <span class="tag">2D Game</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Face Recognition System</h3>
-                        <p class="project-date">Dec 2023 – Jan 2024</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Real-time face recognition system using OpenCV and CNN-based deep learning. Enhanced system speed and accuracy through model optimization.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">OpenCV</span>
-                            <span class="tag">Deep Learning</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align:center; margin-top:40px;">
-            <a href="project.html" class="btn btn-primary">
-                More Projects →
-             </a>
-</div>
-        </section>
-        <!-- Education Section -->
-        <section id="education">
-            <h2>Education</h2>
-            <div class="education-item">
-                <h3>Bachelor of Technology in Computer Science Engineering</h3>
-                <p><strong>Poornima University, Jaipur, India</strong></p>
-                <p>Currently Pursuing (2024 – 2028)</p>
-                <p style="margin-top: 1rem; color: var(--primary-color);">📌 Ranked in top 5% of B.Tech CSE batch</p>
-                <p style="color: var(--text-secondary); margin-top: 0.5rem;">Relevant Coursework: Data Structures & Algorithms, OOP, Operating Systems, DBMS, Web Development, Python Programming</p>
-            </div>
-        </section>
-        <!-- Contact Section -->
-        <section id="contact">
-            <div class="contact-section">
-                <h2 style="text-align: center; margin-bottom: 0;">Get In Touch</h2>
-                <div class="contact-links">
-                    <div class="contact-link">
-                        <span>📞 Phone</span>
-                        <a href=""></a>
-                    </div>
-                    <div class="contact-link">
-                        <span>📧 Email</span>
-                        <a href="mailto:vijeshkumar24242424@gmail.com">vijeshkumar@gmail.com</a>
-                    </div>
-                    <div class="contact-link">
-                        <span>🔗 GitHub</span>
-                        <a href="https://github.com/vijeshkumar4545?tab=repositories" target="_blank">Visit GitHub</a>
-                    </div>
-                    <div class="contact-link">
-                        <span>💼 LinkedIn</span>
-                        <a href="https://www.linkedin.com/in/vijesh-kumar-366820350/" target="_blank">Visit LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <!-- Add Project Modal -->
-    <div id="addProjectModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Add New Project</h2>
-                <button class="close-btn" onclick="document.getElementById('addProjectModal').style.display='none'">×</button>
-            </div>
-            <form id="projectForm" onsubmit="addProject(event)">
-                <div class="form-group">
-                    <label for="projectName">Project Name</label>
-                    <input type="text" id="projectName" required placeholder="Enter project name">
-                </div>
-                <div class="form-group">
-                    <label for="projectDate">Project Date</label>
-                    <input type="text" id="projectDate" placeholder="e.g., Jan 2024 – Mar 2024">
-                </div>
-                <div class="form-group">
-                    <label for="projectDesc">Description</label>
-                    <textarea id="projectDesc" required placeholder="Describe your project..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="projectTech">Technologies (comma-separated)</label>
-                    <input type="text" id="projectTech" placeholder="e.g., Python, Flask, MySQL">
-                </div>
-                <div class="form-group">
-                    <label for="projectLink">Project Link (Optional)</label>
-                    <input type="url" id="projectLink" placeholder="https://github.com/...">
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Add Project</button>
-            </form>
-            <div class="projects-list" id="customProjects">
-                <p style="text-align: center; color: var(--text-secondary);">No custom projects added yet</p>
-            </div>
+  <header>
+    <nav>
+      <div class="logo">VK</div>
+      <ul class="nav-links">
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="project.html">Projects</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <section class="hero" id="home">
+      <p class="hero-eyebrow">Portfolio · 2024</p>
+      <h1>Vijesh Kumar</h1>
+      <p class="subtitle">Aspiring App Developer | Game Development Specialist | ML Enthusiast</p>
+      <p class="experience">4+ years experience in Unity Game Development &amp; Android Apps</p>
+      <div class="cta-buttons">
+        <a href="#projects" class="btn btn-secondary">View Projects</a>
+      </div>
+    </section>
+    <section id="skills">
+      <p class="section-label">01 — Skills</p>
+      <h2>Technical Skills</h2>
+      <p class="section-sub">Hover to pause · drag to explore</p>
+      <div class="skills-marquee" id="skillsMarquee">
+        <div class="skills-track" id="skillsTrack">
+          <div class="skill-card"><h3>🎮 Game Development</h3><p>Unity, C# scripting, 2D/3D Game Mechanics, Physics Engine, Game UI Design</p></div>
+          <div class="skill-card"><h3>📱 App Development</h3><p>Android Studio, XML Layouts, Firebase, Java/Kotlin, UI/UX Design</p></div>
+          <div class="skill-card"><h3>💻 Web Development</h3><p>HTML5, CSS3, JavaScript, Responsive Design, Bootstrap</p></div>
+          <div class="skill-card"><h3>🤖 Machine Learning</h3><p>Python, NumPy, Pandas, Scikit-learn, OpenCV, CNN, Deep Learning</p></div>
+          <div class="skill-card"><h3>🗄️ Databases</h3><p>MySQL, SQLite, Database Design &amp; Management</p></div>
+          <div class="skill-card"><h3>🛠️ Tools &amp; Platforms</h3><p>Git &amp; GitHub, VS Code, Figma, Android Studio, Google Colab</p></div>
+          <div class="skill-card" aria-hidden="true"><h3>🎮 Game Development</h3><p>Unity, C# scripting, 2D/3D Game Mechanics, Physics Engine, Game UI Design</p></div>
+          <div class="skill-card" aria-hidden="true"><h3>📱 App Development</h3><p>Android Studio, XML Layouts, Firebase, Java/Kotlin, UI/UX Design</p></div>
+          <div class="skill-card" aria-hidden="true"><h3>💻 Web Development</h3><p>HTML5, CSS3, JavaScript, Responsive Design, Bootstrap</p></div>
+          <div class="skill-card" aria-hidden="true"><h3>🤖 Machine Learning</h3><p>Python, NumPy, Pandas, Scikit-learn, OpenCV, CNN, Deep Learning</p></div>
+          <div class="skill-card" aria-hidden="true"><h3>🗄️ Databases</h3><p>MySQL, SQLite, Database Design &amp; Management</p></div>
+          <div class="skill-card" aria-hidden="true"><h3>🛠️ Tools &amp; Platforms</h3><p>Git &amp; GitHub, VS Code, Figma, Android Studio, Google Colab</p></div>
         </div>
+      </div>
+      <p class="skills-hint">Continuous left → right scroll</p>
+    </section>
+    <section id="projects">
+      <p class="section-label">02 — Work</p>
+      <h2>Featured Projects</h2>
+      <p class="section-sub">Games, ML models, and apps I’ve built.</p>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-header"><h3>The Last Day on Earth</h3><p class="project-date">Jan 2024 – Apr 2024</p></div>
+          <div class="project-content">
+            <p>Developed a 3D open-world game featuring dynamic AI and interactive environments. Presented at Poornima University's Prayogam event with recognition for innovation.</p>
+            <div class="project-tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">3D Game</span></div>
+          </div>
+        </div>
+        <a href="projects\unity-game\index.html" style="text-decoration:none;">
+          <div class="project-card">
+            <div class="project-header"><h3>Endless Car Runner</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
+            <div class="project-content">
+              <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
+              <div class="project-tags"><span class="tag">Unity</span><span class="tag">Gameplay</span><span class="tag">2D Game</span></div>
+            </div>
+          </div>
+        </a>
+        <a href="https://vijesh2424-yolo-object-detection.hf.space/" style="text-decoration:none;">
+          <div class="project-card">
+            <div class="project-header"><h3>Object Detection</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
+            <div class="project-content">
+              <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
+              <div class="project-tags"><span class="tag">Unity</span><span class="tag">Gameplay</span><span class="tag">2D Game</span></div>
+            </div>
+          </div>
+        </a>
+        <div class="project-card">
+          <div class="project-header"><h3>Car Price Prediction Model</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
+          <div class="project-content">
+            <p>Built a regression model using Python, Pandas, and Scikit-learn to predict used car prices. Achieved 85% improvement in prediction accuracy.</p>
+            <div class="project-tags"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Regression</span></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-header"><h3>Chess Game</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
+          <div class="project-content">
+            <p>Buid a chess game using unity 3D with C# Language</p>
+            <div class="project-tags"><span class="tag">Unity</span><span class="tag">Game Development</span><span class="tag">2D Game</span></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-header"><h3>Face Recognition System</h3><p class="project-date">Dec 2023 – Jan 2024</p></div>
+          <div class="project-content">
+            <p>Real-time face recognition system using OpenCV and CNN-based deep learning. Enhanced system speed and accuracy through model optimization.</p>
+            <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Deep Learning</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="more-projects">
+        <a href="project.html" class="btn btn-primary">More Projects →</a>
+      </div>
+    </section>
+  </div>
+  <div class="board-section" id="certificates">
+    <div class="container" style="padding-bottom:0.5rem;">
+      <p class="section-label">03 — Case Board</p>
+      <h2>Certificates</h2>
+      <p class="section-sub">Click any certificate to view — view only, no download.</p>
     </div>
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Vijesh Kumar. All rights reserved. | Building Innovative Solutions</p>
-    </footer>
-    <script>
-        let customProjects = [];
-        function addProject(event) {
-            event.preventDefault();
-            const projectName = document.getElementById('projectName').value;
-            const projectDate = document.getElementById('projectDate').value;
-            const projectDesc = document.getElementById('projectDesc').value;
-            const projectTech = document.getElementById('projectTech').value;
-            const projectLink = document.getElementById('projectLink').value;
-            const project = {
-                id: Date.now(),
-                name: projectName,
-                date: projectDate,
-                desc: projectDesc,
-                tech: projectTech.split(',').map(t => t.trim()),
-                link: projectLink
-            };
-            customProjects.push(project);
-            displayCustomProjects();
-            // Clear form
-            document.getElementById('projectForm').reset();
-            alert('✅ Project added successfully! Scroll down to see it.');
-        }
-        function displayCustomProjects() {
-            const container = document.getElementById('customProjects');
-            if (customProjects.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No custom projects added yet</p>';
-                return;
-            }
-            container.innerHTML = customProjects.map(project => `
-                <div class="project-item">
-                    <div>
-                        <strong>${project.name}</strong>
-                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.3rem;">${project.date || 'No date'}</p>
-                    </div>
-                    <button onclick="removeProject(${project.id})">Remove</button>
-                </div>
-            `).join('');
-        }
-        function removeProject(id) {
-            customProjects = customProjects.filter(p => p.id !== id);
-            displayCustomProjects();
-            alert('Project removed!');
-        }
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('addProjectModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    <div class="container">
+      <div class="corkboard">
+        <svg class="string-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M80 80 C 200 40, 350 120, 480 90 S 700 30, 900 100" fill="none" stroke="#c45c4a" stroke-width="4" stroke-linecap="round"/>
+          <path d="M120 220 C 280 180, 400 260, 550 200 S 780 160, 920 240" fill="none" stroke="#c45c4a" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+        <div class="board-grid" id="certsGrid">
+          <p class="board-empty">No certificates pinned yet.</p>
+        </div>
+      </div>
+      <div class="board-actions">
+        <button type="button" class="btn btn-secondary" id="adminUnlockBtn">Admin unlock</button>
+        <button type="button" class="btn btn-primary admin-only" id="openCertModal">+ Pin Certificate</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <section id="education">
+      <p class="section-label">04 — Education</p>
+      <h2>Education</h2>
+      <div class="education-item">
+        <h3>Bachelor of Technology in Computer Science Engineering</h3>
+        <p><strong>Poornima University, Jaipur, India</strong></p>
+        <p>Currently Pursuing (2024 – 2028)</p>
+        <p class="highlight">📌 Ranked in top 5% of B.Tech CSE batch</p>
+        <p class="coursework">Relevant Coursework: Data Structures &amp; Algorithms, OOP, Operating Systems, DBMS, Web Development, Python Programming</p>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="contact-section">
+        <p class="section-label" style="margin-bottom:0.35rem;">05 — Contact</p>
+        <h2>Get In Touch</h2>
+        <div class="contact-links">
+          <div class="contact-link"><span>Phone</span><a href=""></a></div>
+          <div class="contact-link"><span>Email</span><a href="mailto:vijeshkumar24242424@gmail.com">vijeshkumar@gmail.com</a></div>
+          <div class="contact-link"><span>GitHub</span><a href="https://github.com/vijeshkumar4545?tab=repositories" target="_blank">Visit GitHub</a></div>
+          <div class="contact-link"><span>LinkedIn</span><a href="https://www.linkedin.com/in/vijesh-kumar-366820350/" target="_blank">Visit LinkedIn</a></div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Admin password -->
+  <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Admin unlock</h2>
+        <button class="close-btn" data-close="adminModal">×</button>
+      </div>
+      <form id="adminForm">
+        <div class="form-group">
+          <label for="adminPass">Password</label>
+          <input type="password" id="adminPass" required placeholder="Enter admin password" autocomplete="off">
+          <p class="form-hint">Default: vijesh2024 — change in script.js</p>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Unlock</button>
+      </form>
+    </div>
+  </div>
+  <!-- Add cert: one-click file upload -->
+  <div id="addCertModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Pin Certificate</h2>
+        <button class="close-btn" data-close="addCertModal">×</button>
+      </div>
+      <form id="certForm">
+        <div class="form-group">
+          <label for="certTitle">Title</label>
+          <input type="text" id="certTitle" required placeholder="e.g. Unity Fundamentals">
+        </div>
+        <div class="form-group">
+          <label for="certOrg">Issued by</label>
+          <input type="text" id="certOrg" required placeholder="e.g. Coursera">
+        </div>
+        <div class="form-group">
+          <label for="certDate">Date</label>
+          <input type="text" id="certDate" placeholder="e.g. March 2024">
+        </div>
+        <div class="form-group">
+          <label>Certificate image</label>
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="certFile" accept="image/*">
+            <div class="upload-icon">📁</div>
+            <p>Click to choose image from your computer</p>
+            <p class="file-name" id="fileName"></p>
+            <img class="preview-thumb" id="previewThumb" alt="Preview">
+          </div>
+          <p class="form-hint">PNG / JPG · max ~1.5 MB recommended (stored in this browser)</p>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;" id="pinBtn">Pin to board</button>
+      </form>
+    </div>
+  </div>
+  <!-- Viewer: no download -->
+  <div id="viewerModal" class="modal viewer-modal">
+    <div class="viewer-box">
+      <div class="viewer-top">
+        <h3 id="viewerTitle">Certificate</h3>
+        <button class="close-btn" data-close="viewerModal">×</button>
+      </div>
+      <div class="viewer-body" id="viewerBody"></div>
+      <div class="viewer-meta" id="viewerMeta"></div>
+    </div>
+  </div>
+  <div id="addProjectModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add New Project</h2>
+        <button class="close-btn" onclick="document.getElementById('addProjectModal').style.display='none'">×</button>
+      </div>
+      <form id="projectForm" onsubmit="addProject(event)">
+        <div class="form-group"><label for="projectName">Project Name</label><input type="text" id="projectName" required></div>
+        <div class="form-group"><label for="projectDate">Project Date</label><input type="text" id="projectDate"></div>
+        <div class="form-group"><label for="projectDesc">Description</label><textarea id="projectDesc" required></textarea></div>
+        <div class="form-group"><label for="projectTech">Technologies</label><input type="text" id="projectTech"></div>
+        <div class="form-group"><label for="projectLink">Link</label><input type="url" id="projectLink"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Add Project</button>
+      </form>
+      <div class="projects-list" id="customProjects"><p style="text-align:center;color:var(--muted)">No custom projects</p></div>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2024 Vijesh Kumar. All rights reserved. | Building Innovative Solutions</p>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
+ 
  
 project.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Projects - Vijesh Kumar</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects - Vijesh Kumar</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">VK</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="project.html">Projects</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
-        <section id="projects">
-            <h2>All Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>The Last Day on Earth</h3>
-                        <p class="project-date">Jan 2024 – Apr 2024</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Developed a 3D open-world game featuring dynamic AI and interactive environments. Presented at Poornima University's Prayogam event with recognition for innovation.</p>
-                        <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">C#</span>
-                            <span class="tag">3D Game</span>
-                        </div>
-                    </div>
-                </div>
-                <a href="projects/unity-game/index.html" style="text-decoration:none;">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>Endless Car Runner</h3>
-                            <p class="project-date">Jun 2023 – Aug 2023</p>
-                        </div>
-                        <div class="project-content">
-                            <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
-                            <div class="project-tags">
-                                <span class="tag">Unity</span>
-                                <span class="tag">Gameplay</span>
-                                <span class="tag">2D Game</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://vijesh2424-yolo-object-detection.hf.space/" target="_blank" style="text-decoration:none;">
-                    <div class="project-card">
-                        <div class="project-header">
-                            <h3>Object Detection</h3>
-                            <p class="project-date">Jun 2023 – Aug 2023</p>
-                        </div>
-                        <div class="project-content">
-                            <p>YOLO based real-time object detection system using Deep Learning and Computer Vision.</p>
-                            <div class="project-tags">
-                                <span class="tag">Python</span>
-                                <span class="tag">YOLO</span>
-                                <span class="tag">OpenCV</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Car Price Prediction Model</h3>
-                        <p class="project-date">Sep 2023 – Nov 2023</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Built a regression model using Python, Pandas, and Scikit-learn to predict used car prices.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Machine Learning</span>
-                            <span class="tag">Regression</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Chess Game</h3>
-                        <p class="project-date">Sep 2023 – Nov 2023</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Built a chess game using Unity 3D and C#.</p>
-                        <div class="project-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">Game Development</span>
-                            <span class="tag">2D Game</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Face Recognition System</h3>
-                        <p class="project-date">Dec 2023 – Jan 2024</p>
-                    </div>
-                    <div class="project-content">
-                        <p>Real-time face recognition system using OpenCV and CNN-based deep learning.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">OpenCV</span>
-                            <span class="tag">Deep Learning</span>
-                        </div>
-                    </div>
-                </div>
+  <header>
+    <nav>
+      <div class="logo">VK</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="project.html">Projects</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    <section id="projects" class="visible">
+      <p class="section-label">All work</p>
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card visible">
+          <div class="project-header"><h3>The Last Day on Earth</h3><p class="project-date">Jan 2024 – Apr 2024</p></div>
+          <div class="project-content">
+            <p>Developed a 3D open-world game featuring dynamic AI and interactive environments. Presented at Poornima University's Prayogam event with recognition for innovation.</p>
+            <div class="project-tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">3D Game</span></div>
+          </div>
+        </div>
+        <a href="projects/unity-game/index.html" style="text-decoration:none;">
+          <div class="project-card visible">
+            <div class="project-header"><h3>Endless Car Runner</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
+            <div class="project-content">
+              <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
+              <div class="project-tags"><span class="tag">Unity</span><span class="tag">Gameplay</span><span class="tag">2D Game</span></div>
             </div>
-        </section>
-    </div>
-    <footer>
-        <p>&copy; 2024 Vijesh Kumar. All rights reserved.</p>
-    </footer>
+          </div>
+        </a>
+        <a href="https://vijesh2424-yolo-object-detection.hf.space/" target="_blank" style="text-decoration:none;">
+          <div class="project-card visible">
+            <div class="project-header"><h3>Object Detection</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
+            <div class="project-content">
+              <p>YOLO based real-time object detection system using Deep Learning and Computer Vision.</p>
+              <div class="project-tags"><span class="tag">Python</span><span class="tag">YOLO</span><span class="tag">OpenCV</span></div>
+            </div>
+          </div>
+        </a>
+        <div class="project-card visible">
+          <div class="project-header"><h3>Car Price Prediction Model</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
+          <div class="project-content">
+            <p>Built a regression model using Python, Pandas, and Scikit-learn to predict used car prices.</p>
+            <div class="project-tags"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Regression</span></div>
+          </div>
+        </div>
+        <div class="project-card visible">
+          <div class="project-header"><h3>Chess Game</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
+          <div class="project-content">
+            <p>Built a chess game using Unity 3D and C#.</p>
+            <div class="project-tags"><span class="tag">Unity</span><span class="tag">Game Development</span><span class="tag">2D Game</span></div>
+          </div>
+        </div>
+        <div class="project-card visible">
+          <div class="project-header"><h3>Face Recognition System</h3><p class="project-date">Dec 2023 – Jan 2024</p></div>
+          <div class="project-content">
+            <p>Real-time face recognition system using OpenCV and CNN-based deep learning.</p>
+            <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Deep Learning</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer><p>&copy; 2024 Vijesh Kumar. All rights reserved.</p></footer>
+  <script src="script.js"></script>
 </body>
 </html>
+ 
+script.js
+(function () {
+  "use strict";
+ 
+  var CERT_KEY = "vk_certs_board_v2";
+  var ADMIN_KEY = "vk_admin_unlocked";
+  var MAX_IMAGE_SIDE = 1400; // resize large photos before save
+  var MAX_DATA_MB = 1.8;
+  // ----- Scroll reveal -----
+  var revealEls = document.querySelectorAll("section, .project-card");
+  var PVijesh = "vijesh10101010";
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var parent = e.target.parentElement;
+          if (parent && parent.classList.contains("projects-grid")) {
+            var kids = Array.prototype.slice.call(parent.children);
+            var i = kids.indexOf(e.target);
+            if (i >= 0) e.target.style.transitionDelay = i * 0.07 + "s";
+          }
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("visible"); });
+  }
+  // ----- Nav -----
+  var sections = document.querySelectorAll("section[id], #certificates");
+  var navLinks = document.querySelectorAll(".nav-links a[href^='#']");
+  function setActive() {
+    var current = "";
+    sections.forEach(function (s) {
+      if (s.id && window.scrollY >= s.offsetTop - 130) current = s.id;
+    });
+    navLinks.forEach(function (l) {
+      l.classList.toggle("active", l.getAttribute("href") === "#" + current);
+    });
+  }
+  window.addEventListener("scroll", setActive, { passive: true });
+  setActive();
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var id = a.getAttribute("href");
+      if (id.length > 1) {
+        var t = document.querySelector(id);
+        if (t) {
+          e.preventDefault();
+          window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: "smooth" });
+        }
+      }
+    });
+  });
+  // ----- Skills marquee L→R -----
+  var track = document.getElementById("skillsTrack");
+  var marquee = document.getElementById("skillsMarquee");
+  if (track && marquee) {
+    var offset = 0, speed = 0.5, paused = false, dragging = false, startX = 0, startOff = 0, halfW = 0;
+    function measure() {
+      var cards = track.querySelectorAll(".skill-card");
+      var half = Math.floor(cards.length / 2);
+      if (half < 1) return;
+      halfW = cards[half].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
+      if (Math.abs(offset) < 1) offset = -halfW * 0.1;
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    function tick() {
+      if (!paused && !dragging && halfW > 0) {
+        offset += speed;
+        if (offset >= 0) offset -= halfW;
+      }
+      track.style.transform = "translateX(" + offset + "px)";
+      requestAnimationFrame(tick);
+    }
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) requestAnimationFrame(tick);
+    marquee.addEventListener("mouseenter", function () { paused = true; });
+    marquee.addEventListener("mouseleave", function () { if (!dragging) paused = false; });
+    function down(e) {
+      dragging = true; paused = true;
+      startX = e.clientX || (e.touches && e.touches[0].clientX);
+      startOff = offset;
+    }
+    function move(e) {
+      if (!dragging) return;
+      var x = e.clientX || (e.touches && e.touches[0].clientX);
+      offset = startOff + (x - startX);
+      while (offset > 0) offset -= halfW;
+      while (offset < -halfW) offset += halfW;
+    }
+    function up() { dragging = false; paused = false; }
+    marquee.addEventListener("mousedown", down);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
+    marquee.addEventListener("touchstart", down, { passive: true });
+    window.addEventListener("touchmove", move, { passive: true });
+    window.addEventListener("touchend", up);
+  }
+  // ----- Admin -----
+  function isAdmin() { return sessionStorage.getItem(ADMIN_KEY) === "1"; }
+  function setAdmin(on) {
+    if (on) {
+      sessionStorage.setItem(ADMIN_KEY, "1");
+      document.body.classList.add("is-admin");
+    } else {
+      sessionStorage.removeItem(ADMIN_KEY);
+      document.body.classList.remove("is-admin");
+    }
+  }
+  if (isAdmin()) document.body.classList.add("is-admin");
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get("admin") === PVijesh) setAdmin(true);
+  } catch (e) {}
+  function openModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.classList.add("open");
+    m.style.display = "flex";
+  }
+  function closeModal(id) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    m.classList.remove("open");
+    m.style.display = "none";
+  }
+  document.querySelectorAll("[data-close]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      closeModal(btn.getAttribute("data-close"));
+    });
+  });
+  document.querySelectorAll(".modal").forEach(function (m) {
+    m.addEventListener("click", function (e) {
+      if (e.target === m) {
+        m.classList.remove("open");
+        m.style.display = "none";
+      }
+    });
+  });
+  var unlockBtn = document.getElementById("adminUnlockBtn");
+  if (unlockBtn) {
+    unlockBtn.addEventListener("click", function () {
+      if (isAdmin()) {
+        setAdmin(false);
+        unlockBtn.textContent = "Admin unlock";
+        alert("Admin locked.");
+      } else {
+        openModal("adminModal");
+      }
+    });
+  }
+  var adminForm = document.getElementById("adminForm");
+  if (adminForm) {
+    adminForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (document.getElementById("adminPass").value === PVijesh) {
+        setAdmin(true);
+        closeModal("adminModal");
+        if (unlockBtn) unlockBtn.textContent = "Lock admin";
+        alert("Admin unlocked. You can pin & delete certificates.");
+      } else {
+        alert("Wrong password.");
+      }
+    });
+  }
+  var openCertBtn = document.getElementById("openCertModal");
+  if (openCertBtn) {
+    openCertBtn.addEventListener("click", function () {
+      if (!isAdmin()) { openModal("adminModal"); return; }
+      resetUpload();
+      openModal("addCertModal");
+    });
+  }
+  // ----- File upload (one click, no URL) -----
+  var pendingDataUrl = null;
+  var fileInput = document.getElementById("certFile");
+  var uploadZone = document.getElementById("uploadZone");
+  var fileNameEl = document.getElementById("fileName");
+  var previewThumb = document.getElementById("previewThumb");
+  function resetUpload() {
+    pendingDataUrl = null;
+    if (fileInput) fileInput.value = "";
+    if (fileNameEl) fileNameEl.textContent = "";
+    if (previewThumb) {
+      previewThumb.style.display = "none";
+      previewThumb.removeAttribute("src");
+    }
+  }
+  function readAndCompress(file, cb) {
+    if (!file || !file.type.match(/^image\//)) {
+      alert("Please choose an image file (PNG/JPG).");
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function (ev) {
+      var img = new Image();
+      img.onload = function () {
+        var w = img.width, h = img.height;
+        var scale = 1;
+        if (w > MAX_IMAGE_SIDE || h > MAX_IMAGE_SIDE) {
+          scale = MAX_IMAGE_SIDE / Math.max(w, h);
+        }
+        var cw = Math.round(w * scale);
+        var ch = Math.round(h * scale);
+        var canvas = document.createElement("canvas");
+        canvas.width = cw;
+        canvas.height = ch;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, cw, ch);
+        var quality = 0.82;
+        var dataUrl = canvas.toDataURL("image/jpeg", quality);
+        // shrink quality if still huge
+        while (dataUrl.length > MAX_DATA_MB * 1024 * 1024 && quality > 0.45) {
+          quality -= 0.1;
+          dataUrl = canvas.toDataURL("image/jpeg", quality);
+        }
+        if (dataUrl.length > MAX_DATA_MB * 1024 * 1024 * 1.2) {
+          alert("Image is still too large after compress. Try a smaller photo.");
+          return;
+        }
+        cb(dataUrl, file.name);
+      };
+      img.onerror = function () { alert("Could not read image."); };
+      img.src = ev.target.result;
+    };
+    reader.onerror = function () { alert("Could not read file."); };
+    reader.readAsDataURL(file);
+  }
+  if (uploadZone && fileInput) {
+    uploadZone.addEventListener("click", function () { fileInput.click(); });
+    fileInput.addEventListener("change", function () {
+      var f = fileInput.files && fileInput.files[0];
+      if (!f) return;
+      readAndCompress(f, function (dataUrl, name) {
+        pendingDataUrl = dataUrl;
+        if (fileNameEl) fileNameEl.textContent = name + " ✓ ready";
+        if (previewThumb) {
+          previewThumb.src = dataUrl;
+          previewThumb.style.display = "block";
+        }
+      });
+    });
+    // drag & drop
+    uploadZone.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      uploadZone.classList.add("dragover");
+    });
+    uploadZone.addEventListener("dragleave", function () {
+      uploadZone.classList.remove("dragover");
+    });
+    uploadZone.addEventListener("drop", function (e) {
+      e.preventDefault();
+      uploadZone.classList.remove("dragover");
+      var f = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (!f) return;
+      readAndCompress(f, function (dataUrl, name) {
+        pendingDataUrl = dataUrl;
+        if (fileNameEl) fileNameEl.textContent = name + " ✓ ready";
+        if (previewThumb) {
+          previewThumb.src = dataUrl;
+          previewThumb.style.display = "block";
+        }
+      });
+    });
+  }
+  // ----- Certificates store -----
+  var certs = [];
+  var rots = [-2.5, 1.8, -1.2, 2.2, -3, 1, -1.8, 2.8];
+  function loadCerts() {
+    try { certs = JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); }
+    catch (e) { certs = []; }
+  }
+  function saveCerts() {
+    try {
+      localStorage.setItem(CERT_KEY, JSON.stringify(certs));
+    } catch (e) {
+      alert("Storage full. Delete an old certificate or use a smaller image.");
+      throw e;
+    }
+  }
+  function esc(s) {
+    var d = document.createElement("div");
+    d.textContent = s || "";
+    return d.innerHTML;
+  }
+  function renderCerts() {
+    var g = document.getElementById("certsGrid");
+    if (!g) return;
+    if (!certs.length) {
+      g.innerHTML = '<p class="board-empty">No certificates pinned yet.</p>';
+      return;
+    }
+    g.innerHTML = certs.map(function (c, i) {
+      return (
+        '<div class="cert-note" style="--rot:' + rots[i % rots.length] + 'deg" data-id="' + c.id + '">' +
+          '<span class="pin"></span><span class="tape"></span>' +
+          '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '" title="Delete">✕</button>' +
+          "<h3>" + esc(c.title) + "</h3>" +
+          '<p class="cert-org">' + esc(c.org) + "</p>" +
+          '<p class="cert-date">' + esc(c.date || "") + "</p>" +
+          '<p class="view-hint">Click to view →</p>' +
+        "</div>"
+      );
+    }).join("");
+    g.querySelectorAll(".cert-note").forEach(function (note) {
+      note.addEventListener("click", function (e) {
+        if (e.target.classList.contains("remove-cert")) return;
+        var id = Number(note.getAttribute("data-id"));
+        var c = certs.filter(function (x) { return x.id === id; })[0];
+        if (c) openViewer(c);
+      });
+    });
+    g.querySelectorAll("[data-remove]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (!isAdmin()) return;
+        if (!confirm("Delete this certificate?")) return;
+        var id = Number(btn.getAttribute("data-remove"));
+        certs = certs.filter(function (x) { return x.id !== id; });
+        saveCerts();
+        renderCerts();
+      });
+    });
+  }
+  function openViewer(c) {
+    document.getElementById("viewerTitle").textContent = c.title || "Certificate";
+    document.getElementById("viewerMeta").textContent =
+      (c.org || "") + (c.date ? " · " + c.date : "") + " · View only · no download";
+    var body = document.getElementById("viewerBody");
+    body.innerHTML = "";
+    if (c.image) {
+      var img = document.createElement("img");
+      img.src = c.image;
+      img.alt = c.title || "Certificate";
+      img.draggable = false;
+      body.appendChild(img);
+    } else {
+      body.innerHTML = '<p style="color:#c4b59a;padding:2rem;text-align:center;">No image for this certificate.</p>';
+    }
+    openModal("viewerModal");
+  }
+  var viewerBody = document.getElementById("viewerBody");
+  if (viewerBody) {
+    viewerBody.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  }
+  loadCerts();
+  renderCerts();
+  var certForm = document.getElementById("certForm");
+  if (certForm) {
+    certForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!isAdmin()) return;
+      var title = document.getElementById("certTitle").value.trim();
+      var org = document.getElementById("certOrg").value.trim();
+      var date = document.getElementById("certDate").value.trim();
+      if (!title || !org) return;
+      if (!pendingDataUrl) {
+        alert("Please choose a certificate image first.");
+        return;
+      }
+      certs.push({
+        id: Date.now(),
+        title: title,
+        org: org,
+        date: date,
+        image: pendingDataUrl
+      });
+      try {
+        saveCerts();
+      } catch (err) {
+        certs.pop();
+        return;
+      }
+      renderCerts();
+      certForm.reset();
+      resetUpload();
+      closeModal("addCertModal");
+    });
+  }
+  // Legacy project helpers
+  window.addProject = function (event) {
+    event.preventDefault();
+    if (!window.customProjects) window.customProjects = [];
+    window.customProjects.push({
+      id: Date.now(),
+      name: document.getElementById("projectName").value,
+      date: document.getElementById("projectDate").value,
+      desc: document.getElementById("projectDesc").value,
+      tech: document.getElementById("projectTech").value.split(",").map(function (t) { return t.trim(); }),
+      link: document.getElementById("projectLink").value
+    });
+    displayCustomProjects();
+    document.getElementById("projectForm").reset();
+    alert("Project added!");
+  };
+  window.displayCustomProjects = function () {
+    var c = document.getElementById("customProjects");
+    if (!c) return;
+    var list = window.customProjects || [];
+    if (!list.length) {
+      c.innerHTML = '<p style="text-align:center;color:var(--muted)">No custom projects</p>';
+      return;
+    }
+    c.innerHTML = list.map(function (p) {
+      return '<div class="project-item"><div><strong>' + esc(p.name) + "</strong></div>" +
+        '<button onclick="removeProject(' + p.id + ')">Remove</button></div>';
+    }).join("");
+  };
+  window.removeProject = function (id) {
+    window.customProjects = (window.customProjects || []).filter(function (p) { return p.id !== id; });
+    displayCustomProjects();
+  };
+})();
