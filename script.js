@@ -1,5 +1,5 @@
 (function () {
-  "use strict";
+  "use strict"
 
   /* =========================================================
      PUBLIC CERTIFICATES — everyone sees these
