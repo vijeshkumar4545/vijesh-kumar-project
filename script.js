@@ -15,6 +15,34 @@
       org: "Coursera/DeepLearning.AI/Stanford",
       date: "28 Dec 2025",
       image: "certificates/supervised_machine_learning.png"
+    },
+    {
+      id: 2,
+      title: "Unsupervised Learning, Recommenders,Reinforcement Learning",
+      org: "Coursera/DeepLearning.AI/Stanford",
+      date: "7 feb 2026",
+      image: "certificates/unsupervised.png"
+    },
+    {
+      id: 3,
+      title: "Google Cloud Career Launchpad Cybersecurity track",
+      org: "Coursera/DeepLearning.AI/Stanford",
+      date: "7 jan 2026",
+      image: "certificates/cyberSecurity.png"
+    },
+    {
+      id: 4,
+      title: "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
+      org: "Oracle",
+      date: "8 oct 2025",
+      image: "certificates/generative_ai_2.png"
+    },
+    {
+      id: 5,
+      title: "AI and Innovation: How MongoDB Enables a Resilient AI Strategy",
+      org: "Coursera/DeepLearning.AI/Stanford",
+      date: "6 Aug 2026",
+      image: "certificates/mongoDB.png"
     }
     // {
     //   id: 2,
