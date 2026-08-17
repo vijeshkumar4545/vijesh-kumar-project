@@ -1,23 +1,15 @@
 (function () {
   "use strict";
 
-  /* =========================================================
-     DATA SCIENCE NOTES (View Only)
-     1. Convert your .ipynb → HTML using:
-        jupyter nbconvert --to html yourfile.ipynb
-     2. Put the .html files inside a folder named: notes/
-     3. Add entry below
-     ========================================================= */
+  /* ===================== DATA SCIENCE NOTES ===================== */
   var DEFAULT_NOTES = [
     {
       id: 1,
       title: "Python for Data Science",
       topic: "Basics + Pandas + NumPy",
       date: "2025",
-      // Path of converted HTML file
-      file: "notes/numpy.html",
-      // Optional short description
-      desc: "numpy notes"
+      file: "notes/python_for_data_science.html",
+      desc: "Complete notes on Python fundamentals for Data Science"
     },
     {
       id: 2,
@@ -43,7 +35,45 @@
       file: "notes/data_visualization.html",
       desc: "Beautiful plots and storytelling with data"
     }
-    // Add more notes here...
+  ];
+
+  /* ===================== CERTIFICATES ===================== */
+  var DEFAULT_CERTS = [
+    {
+      id: 1,
+      title: "Supervised Machine Learning: Regression and Classification",
+      org: "Coursera/DeepLearning.AI/Stanford",
+      date: "28 Dec 2025",
+      image: "certificates/supervised_machine_learning.png"
+    },
+    {
+      id: 2,
+      title: "Unsupervised Learning, Recommenders,Reinforcement Learning",
+      org: "Coursera/DeepLearning.AI/Stanford",
+      date: "7 feb 2026",
+      image: "certificates/unsupervised.png"
+    },
+    {
+      id: 3,
+      title: "Google Cloud Career Launchpad Cybersecurity track",
+      org: "Coursera/DeepLearning.AI/Stanford",
+      date: "7 jan 2026",
+      image: "certificates/cyberSecurity.png"
+    },
+    {
+      id: 4,
+      title: "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional",
+      org: "Oracle",
+      date: "8 oct 2025",
+      image: "certificates/generative_ai_2.png"
+    },
+    {
+      id: 5,
+      title: "AI and Innovation: How MongoDB Enables a Resilient AI Strategy",
+      org: "Coursera/DeepLearning.AI/Stanford",
+      date: "6 Aug 2026",
+      image: "certificates/mongoDB.png"
+    }
   ];
 
   var ADMIN_PASSWORD = "vijesh10101010";
@@ -53,11 +83,10 @@
   var MAX_DATA_MB = 1.8;
 
   // ========== TYPEWRITER ==========
-  (function typewriterLoop() {
+  (function () {
     var el = document.getElementById("heroName");
     if (!el) return;
-    var text = "Vijesh Kumar";
-    var i = 0, isDeleting = false, speed = 120;
+    var text = "Vijesh Kumar", i = 0, isDeleting = false;
     function tick() {
       if (!isDeleting) {
         el.textContent = text.substring(0, i + 1);
@@ -68,13 +97,13 @@
         i--;
         if (i === 0) { isDeleting = false; setTimeout(tick, 600); return; }
       }
-      setTimeout(tick, isDeleting ? 70 : speed);
+      setTimeout(tick, isDeleting ? 70 : 120);
     }
     tick();
   })();
 
   // ========== SKILLS ORBIT ==========
-  (function initSkillsOrbit() {
+  (function () {
     var container = document.getElementById("skillsOrbit");
     if (!container) return;
 
@@ -109,25 +138,23 @@
       var el = document.createElement("div");
       el.className = "orbit-logo";
       el.innerHTML = '<i class="' + item.icon + ' colored"></i><span class="logo-label">' + item.label + '</span>';
-      el.title = item.label;
       container.appendChild(el);
     });
 
     var logoEls = container.querySelectorAll(".orbit-logo");
-    var centerX = 0, centerY = 0;
-    var angles = [], radii = [], speeds = [];
+    var centerX = 0, centerY = 0, angles = [], radii = [], speeds = [];
 
     logoEls.forEach(function (el, i) {
-      var orbitIndex = i % 4;
-      radii.push(110 + orbitIndex * 55 + (Math.random() * 25 - 12));
+      var orbit = i % 4;
+      radii.push(110 + orbit * 55 + (Math.random() * 25 - 12));
       angles.push((i / logoEls.length) * Math.PI * 2 + Math.random() * 0.4);
-      speeds.push(0.0018 + Math.random() * 0.0022 + (orbitIndex * 0.0004));
+      speeds.push(0.0018 + Math.random() * 0.0022 + orbit * 0.0004);
     });
 
     function resize() {
-      var rect = container.getBoundingClientRect();
-      centerX = rect.width / 2;
-      centerY = rect.height / 2;
+      var r = container.getBoundingClientRect();
+      centerX = r.width / 2;
+      centerY = r.height / 2;
     }
     resize();
     window.addEventListener("resize", resize);
@@ -137,7 +164,7 @@
         angles[i] += speeds[i];
         var x = centerX + Math.cos(angles[i]) * radii[i];
         var y = centerY + Math.sin(angles[i]) * radii[i];
-        el.style.transform = "translate(" + (x - 28) + "px, " + (y - 28) + "px)";
+        el.style.transform = "translate(" + (x - 28) + "px," + (y - 28) + "px)";
       });
       requestAnimationFrame(animate);
     }
@@ -146,16 +173,14 @@
     }
   })();
 
-  // ========== NOTES (Floating + View Only) ==========
+  // ========== NOTES (Strict View Only) ==========
   function renderNotes() {
     var grid = document.getElementById("notesGrid");
     if (!grid) return;
-
     if (!DEFAULT_NOTES.length) {
-      grid.innerHTML = '<p class="board-empty" style="color:var(--muted)">No notes added yet.</p>';
+      grid.innerHTML = '<p style="color:var(--muted);text-align:center;">No notes added yet.</p>';
       return;
     }
-
     grid.innerHTML = DEFAULT_NOTES.map(function (n, i) {
       return (
         '<div class="note-card float-card" data-id="' + n.id + '" style="animation-delay:' + (i * 0.12) + 's">' +
@@ -174,7 +199,7 @@
     grid.querySelectorAll(".note-card").forEach(function (card) {
       card.addEventListener("click", function () {
         var id = Number(card.getAttribute("data-id"));
-        var note = DEFAULT_NOTES.filter(function (x) { return x.id === id; })[0];
+        var note = DEFAULT_NOTES.find(function (x) { return x.id === id; });
         if (note) openNotesViewer(note);
       });
     });
@@ -188,33 +213,45 @@
     var body = document.getElementById("notesViewerBody");
     body.innerHTML = "";
 
-    // Create iframe for the converted HTML notebook
+    var protect = document.createElement("div");
+    protect.className = "notes-protect-layer";
+    protect.innerHTML = '<div class="notes-watermark">VIEW ONLY</div>';
+
     var iframe = document.createElement("iframe");
     iframe.src = note.file;
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
+    iframe.className = "notes-iframe";
     iframe.setAttribute("sandbox", "allow-same-origin allow-scripts");
     iframe.setAttribute("loading", "lazy");
 
-    // Prevent right-click inside iframe (best effort)
+    body.appendChild(iframe);
+    body.appendChild(protect);
+
     iframe.onload = function () {
       try {
-        iframe.contentDocument.addEventListener("contextmenu", function (e) {
-          e.preventDefault();
-        });
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        doc.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+        doc.addEventListener("selectstart", function (e) { e.preventDefault(); });
+        doc.body.style.userSelect = "none";
+        doc.body.style.webkitUserSelect = "none";
       } catch (e) {}
     };
 
-    body.appendChild(iframe);
     openModal("notesViewerModal");
   }
 
-  // Disable right-click on notes viewer
-  var notesBody = document.getElementById("notesViewerBody");
-  if (notesBody) {
-    notesBody.addEventListener("contextmenu", function (e) { e.preventDefault(); });
-  }
+  // Extra keyboard protection
+  (function () {
+    var modal = document.getElementById("notesViewerModal");
+    if (!modal) return;
+    modal.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    modal.addEventListener("keydown", function (e) {
+      if (e.ctrlKey && ["s", "p", "c", "a", "u"].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      if (e.key === "F12") e.preventDefault();
+    });
+  })();
 
   renderNotes();
 
@@ -228,7 +265,7 @@
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    }, { threshold: 0.1 });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add("visible"); });
@@ -262,7 +299,7 @@
     });
   });
 
-  // ========== ADMIN + CERTIFICATES (same as before) ==========
+  // ========== ADMIN + CERTIFICATES ==========
   function isAdmin() { return sessionStorage.getItem(ADMIN_KEY) === "1"; }
   function setAdmin(on) {
     if (on) {
@@ -277,16 +314,13 @@
 
   function openModal(id) {
     var m = document.getElementById(id);
-    if (!m) return;
-    m.classList.add("open");
-    m.style.display = "flex";
+    if (m) { m.classList.add("open"); m.style.display = "flex"; }
   }
   function closeModal(id) {
     var m = document.getElementById(id);
-    if (!m) return;
-    m.classList.remove("open");
-    m.style.display = "none";
+    if (m) { m.classList.remove("open"); m.style.display = "none"; }
   }
+
   document.querySelectorAll("[data-close]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       closeModal(btn.getAttribute("data-close"));
@@ -294,10 +328,7 @@
   });
   document.querySelectorAll(".modal").forEach(function (m) {
     m.addEventListener("click", function (e) {
-      if (e.target === m) {
-        m.classList.remove("open");
-        m.style.display = "none";
-      }
+      if (e.target === m) closeModal(m.id);
     });
   });
 
@@ -308,11 +339,10 @@
         setAdmin(false);
         unlockBtn.textContent = "Admin unlock";
         alert("Admin locked.");
-      } else {
-        openModal("adminModal");
-      }
+      } else openModal("adminModal");
     });
   }
+
   var adminForm = document.getElementById("adminForm");
   if (adminForm) {
     adminForm.addEventListener("submit", function (e) {
@@ -322,29 +352,20 @@
         closeModal("adminModal");
         if (unlockBtn) unlockBtn.textContent = "Lock admin";
         alert("Admin unlocked.");
-      } else {
-        alert("Wrong password.");
-      }
+      } else alert("Wrong password.");
     });
   }
 
-  // Certificate logic (same as previous)
-  var DEFAULT_CERTS = [
-    { id: 1, title: "Supervised Machine Learning: Regression and Classification", org: "Coursera/DeepLearning.AI/Stanford", date: "28 Dec 2025", image: "certificates/supervised_machine_learning.png" },
-    { id: 2, title: "Unsupervised Learning, Recommenders,Reinforcement Learning", org: "Coursera/DeepLearning.AI/Stanford", date: "7 feb 2026", image: "certificates/unsupervised.png" },
-    { id: 3, title: "Google Cloud Career Launchpad Cybersecurity track", org: "Coursera/DeepLearning.AI/Stanford", date: "7 jan 2026", image: "certificates/cyberSecurity.png" },
-    { id: 4, title: "Oracle Cloud Infrastructure 2025 Certified Generative AI Professional", org: "Oracle", date: "8 oct 2025", image: "certificates/generative_ai_2.png" },
-    { id: 5, title: "AI and Innovation: How MongoDB Enables a Resilient AI Strategy", org: "Coursera/DeepLearning.AI/Stanford", date: "6 Aug 2026", image: "certificates/mongoDB.png" }
-  ];
-
+  // Certificates
   var localCerts = [];
   var rots = [-2.5, 1.8, -1.2, 2.2, -3, 1, -1.8, 2.8];
   function loadLocal() {
-    try { localCerts = JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); } catch (e) { localCerts = []; }
+    try { localCerts = JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); }
+    catch (e) { localCerts = []; }
   }
   function saveLocal() {
     try { localStorage.setItem(CERT_KEY, JSON.stringify(localCerts)); }
-    catch (e) { alert("Storage full."); throw e; }
+    catch (e) { alert("Storage full"); throw e; }
   }
   function allCerts() { return DEFAULT_CERTS.concat(localCerts); }
   function esc(s) {
@@ -352,6 +373,7 @@
     d.textContent = s || "";
     return d.innerHTML;
   }
+
   function renderCerts() {
     var g = document.getElementById("certsGrid");
     if (!g) return;
@@ -373,14 +395,16 @@
         "</div>"
       );
     }).join("");
+
     g.querySelectorAll(".cert-note").forEach(function (note) {
       note.addEventListener("click", function (e) {
         if (e.target.classList.contains("remove-cert")) return;
         var id = Number(note.getAttribute("data-id"));
-        var c = allCerts().filter(function (x) { return x.id === id; })[0];
+        var c = allCerts().find(function (x) { return x.id === id; });
         if (c) openViewer(c);
       });
     });
+
     g.querySelectorAll("[data-remove]").forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -393,48 +417,59 @@
       });
     });
   }
+
   function openViewer(c) {
     document.getElementById("viewerTitle").textContent = c.title || "Certificate";
-    document.getElementById("viewerMeta").textContent = (c.org || "") + (c.date ? " · " + c.date : "") + " · View only · no download";
+    document.getElementById("viewerMeta").textContent =
+      (c.org || "") + (c.date ? " · " + c.date : "") + " · View only · no download";
     var body = document.getElementById("viewerBody");
     body.innerHTML = "";
     if (c.image) {
       var img = document.createElement("img");
       img.src = c.image;
-      img.alt = c.title || "Certificate";
+      img.alt = c.title;
       img.draggable = false;
       body.appendChild(img);
     }
     openModal("viewerModal");
   }
+
   loadLocal();
   renderCerts();
 
-  // Upload logic (same)
+  // Upload
   var pendingDataUrl = null;
   var fileInput = document.getElementById("certFile");
   var uploadZone = document.getElementById("uploadZone");
   var fileNameEl = document.getElementById("fileName");
   var previewThumb = document.getElementById("previewThumb");
+
   function resetUpload() {
     pendingDataUrl = null;
     if (fileInput) fileInput.value = "";
     if (fileNameEl) fileNameEl.textContent = "";
-    if (previewThumb) { previewThumb.style.display = "none"; previewThumb.removeAttribute("src"); }
+    if (previewThumb) {
+      previewThumb.style.display = "none";
+      previewThumb.removeAttribute("src");
+    }
   }
+
   function readAndCompress(file, cb) {
-    if (!file || !file.type.match(/^image\//)) { alert("Please choose an image file."); return; }
+    if (!file || !file.type.match(/^image\//)) {
+      alert("Please choose an image file");
+      return;
+    }
     var reader = new FileReader();
     reader.onload = function (ev) {
       var img = new Image();
       img.onload = function () {
-        var w = img.width, h = img.height, scale = 1;
-        if (w > MAX_IMAGE_SIDE || h > MAX_IMAGE_SIDE) scale = MAX_IMAGE_SIDE / Math.max(w, h);
+        var scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(img.width, img.height));
         var canvas = document.createElement("canvas");
-        canvas.width = Math.round(w * scale);
-        canvas.height = Math.round(h * scale);
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
         canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
-        var quality = 0.82, dataUrl = canvas.toDataURL("image/jpeg", quality);
+        var quality = 0.82;
+        var dataUrl = canvas.toDataURL("image/jpeg", quality);
         while (dataUrl.length > MAX_DATA_MB * 1024 * 1024 && quality > 0.45) {
           quality -= 0.1;
           dataUrl = canvas.toDataURL("image/jpeg", quality);
@@ -445,6 +480,7 @@
     };
     reader.readAsDataURL(file);
   }
+
   if (uploadZone && fileInput) {
     uploadZone.addEventListener("click", function () { fileInput.click(); });
     fileInput.addEventListener("change", function () {
@@ -453,7 +489,10 @@
       readAndCompress(f, function (dataUrl, name) {
         pendingDataUrl = dataUrl;
         if (fileNameEl) fileNameEl.textContent = name + " ✓ ready";
-        if (previewThumb) { previewThumb.src = dataUrl; previewThumb.style.display = "block"; }
+        if (previewThumb) {
+          previewThumb.src = dataUrl;
+          previewThumb.style.display = "block";
+        }
       });
     });
   }
@@ -466,6 +505,7 @@
       openModal("addCertModal");
     });
   }
+
   var certForm = document.getElementById("certForm");
   if (certForm) {
     certForm.addEventListener("submit", function (e) {
@@ -474,14 +514,23 @@
       var title = document.getElementById("certTitle").value.trim();
       var org = document.getElementById("certOrg").value.trim();
       var date = document.getElementById("certDate").value.trim();
-      if (!title || !org || !pendingDataUrl) { alert("Fill all fields + image"); return; }
-      localCerts.push({ id: Date.now(), title: title, org: org, date: date, image: pendingDataUrl });
+      if (!title || !org || !pendingDataUrl) {
+        alert("Fill all fields + image");
+        return;
+      }
+      localCerts.push({
+        id: Date.now(),
+        title: title,
+        org: org,
+        date: date,
+        image: pendingDataUrl
+      });
       try { saveLocal(); } catch (err) { localCerts.pop(); return; }
       renderCerts();
       certForm.reset();
       resetUpload();
       closeModal("addCertModal");
-      alert("Pinned on this PC only. For permanent: put image in certificates/ + add to DEFAULT_CERTS");
+      alert("Pinned on this PC only.\nFor permanent: put image in certificates/ folder + add to DEFAULT_CERTS");
     });
   }
 })();
