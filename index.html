@@ -59,6 +59,7 @@
             <a href="#" class="project-view-btn">Click to view project</a>
           </div>
         </div>
+
         <div class="project-card float-card">
           <div class="project-header"><h3>Endless Car Runner</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
           <div class="project-content">
@@ -67,6 +68,7 @@
             <a href="projects/unity-game/index.html" class="project-view-btn">Click to view project</a>
           </div>
         </div>
+
         <div class="project-card float-card">
           <div class="project-header"><h3>Object Detection</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
           <div class="project-content">
@@ -75,6 +77,7 @@
             <a href="https://vijesh2424-yolo-object-detection.hf.space/" target="_blank" class="project-view-btn">Click to view project</a>
           </div>
         </div>
+
         <div class="project-card float-card">
           <div class="project-header"><h3>Car Price Prediction Model</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
           <div class="project-content">
@@ -83,6 +86,7 @@
             <a href="#" class="project-view-btn">Click to view project</a>
           </div>
         </div>
+
         <div class="project-card float-card">
           <div class="project-header"><h3>Chess Game</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
           <div class="project-content">
@@ -91,6 +95,7 @@
             <a href="https://chessgame1.vercel.app" target="_blank" class="project-view-btn">Click to view project</a>
           </div>
         </div>
+
         <div class="project-card float-card">
           <div class="project-header"><h3>Face Recognition System</h3><p class="project-date">Dec 2023 – Jan 2024</p></div>
           <div class="project-content">
@@ -105,15 +110,12 @@
       </div>
     </section>
 
-    <!-- ==================== DATA SCIENCE NOTES (NEW) ==================== -->
+    <!-- DATA SCIENCE NOTES -->
     <section id="notes">
       <p class="section-label">03 — Knowledge</p>
       <h2>Data Science Notes</h2>
-      <p class="section-sub">View only · Floating cards · No download</p>
-
-      <div class="notes-grid" id="notesGrid">
-        <!-- Cards will be injected by JS -->
-      </div>
+      <p class="section-sub">View only · Floating cards · Download disabled</p>
+      <div class="notes-grid" id="notesGrid"></div>
     </section>
   </div>
 
@@ -168,21 +170,19 @@
     </section>
   </div>
 
-  <!-- ========== NOTES VIEWER MODAL ========== -->
+  <!-- NOTES VIEWER MODAL (Strict View Only) -->
   <div id="notesViewerModal" class="modal viewer-modal">
     <div class="viewer-box notes-viewer-box">
       <div class="viewer-top">
         <h3 id="notesViewerTitle">Data Science Note</h3>
         <button class="close-btn" data-close="notesViewerModal">×</button>
       </div>
-      <div class="viewer-body notes-viewer-body" id="notesViewerBody">
-        <!-- iframe / content goes here -->
-      </div>
-      <div class="viewer-meta" id="notesViewerMeta">View only · Download disabled</div>
+      <div class="viewer-body notes-viewer-body" id="notesViewerBody"></div>
+      <div class="viewer-meta" id="notesViewerMeta">View only · Download, Copy & Save disabled</div>
     </div>
   </div>
 
-  <!-- Existing modals (admin, cert, etc.) -->
+  <!-- ADMIN MODAL -->
   <div id="adminModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -199,6 +199,7 @@
     </div>
   </div>
 
+  <!-- ADD CERT MODAL -->
   <div id="addCertModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -233,257 +234,7 @@
     </div>
   </div>
 
-  <div id="viewerModal" class="modal viewer-modal">
-    <div class="viewer-box">
-      <div class="viewer-top">
-        <h3 id="viewerTitle">Certificate</h3>
-        <button class="close-btn" data-close="viewerModal">×</button>
-      </div>
-      <div class="viewer-body" id="viewerBody"></div>
-      <div class="viewer-meta" id="viewerMeta"></div>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2024 Vijesh Kumar. All rights reserved. | Building Innovative Solutions</p>
-  </footer>
-  <script src="script.js"></script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vijesh Kumar - Portfolio</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-</head>
-<body>
-  <header>
-    <nav>
-      <div class="logo">VK</div>
-      <ul class="nav-links">
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="project.html">Projects</a></li>
-        <li><a href="#notes">Notes</a></li>
-        <li><a href="#certificates">Certificates</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <div class="container">
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <p class="hero-eyebrow">Portfolio · 2024</p>
-      <h1 class="typewriter" id="heroName"></h1>
-      <p class="subtitle">Aspiring App Developer | Game Development Specialist | ML Enthusiast</p>
-      <p class="experience">4+ years experience in Unity Game Development &amp; Android Apps</p>
-      <div class="cta-buttons">
-        <a href="#projects" class="btn btn-secondary">View Projects</a>
-      </div>
-    </section>
-
-    <!-- SKILLS ORBIT -->
-    <section id="skills">
-      <p class="section-label">01 — Skills</p>
-      <h2>Technical Skills</h2>
-      <p class="section-sub">Technologies I work with — continuously orbiting</p>
-      <div class="skills-orbit-wrapper">
-        <div class="skills-orbit" id="skillsOrbit"></div>
-        <div class="orbit-center"><span>VK</span></div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <p class="section-label">02 — Work</p>
-      <h2>Featured Projects</h2>
-      <p class="section-sub">Games, ML models, and apps I’ve built.</p>
-      <div class="projects-grid">
-        <div class="project-card float-card">
-          <div class="project-header"><h3>The Last Day on Earth</h3><p class="project-date">Jan 2024 – Apr 2024</p></div>
-          <div class="project-content">
-            <p>Developed a 3D open-world game featuring dynamic AI and interactive environments. Presented at Poornima University's Prayogam event with recognition for innovation.</p>
-            <div class="project-tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">3D Game</span></div>
-            <a href="#" class="project-view-btn">Click to view project</a>
-          </div>
-        </div>
-        <div class="project-card float-card">
-          <div class="project-header"><h3>Endless Car Runner</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
-          <div class="project-content">
-            <p><img src="certificates/car_game.png" alt="Car Game" width="300"></p>
-            <div class="project-tags"><span class="tag">Unity</span><span class="tag">Gameplay</span><span class="tag">2D Game</span></div>
-            <a href="projects/unity-game/index.html" class="project-view-btn">Click to view project</a>
-          </div>
-        </div>
-        <div class="project-card float-card">
-          <div class="project-header"><h3>Object Detection</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
-          <div class="project-content">
-            <p>YOLO based real-time object detection system using Deep Learning and Computer Vision.</p>
-            <div class="project-tags"><span class="tag">Python</span><span class="tag">YOLO</span><span class="tag">OpenCV</span></div>
-            <a href="https://vijesh2424-yolo-object-detection.hf.space/" target="_blank" class="project-view-btn">Click to view project</a>
-          </div>
-        </div>
-        <div class="project-card float-card">
-          <div class="project-header"><h3>Car Price Prediction Model</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
-          <div class="project-content">
-            <p>Built a regression model using Python, Pandas, and Scikit-learn to predict used car prices. Achieved 85% improvement in prediction accuracy.</p>
-            <div class="project-tags"><span class="tag">Python</span><span class="tag">Machine Learning</span><span class="tag">Regression</span></div>
-            <a href="#" class="project-view-btn">Click to view project</a>
-          </div>
-        </div>
-        <div class="project-card float-card">
-          <div class="project-header"><h3>Chess Game</h3><p class="project-date">Sep 2023 – Nov 2023</p></div>
-          <div class="project-content">
-            <p><img src="certificates/chess_game_1.png" alt="Chess" width="300"></p>
-            <div class="project-tags"><span class="tag">Unity</span><span class="tag">Game Development</span><span class="tag">2D Game</span></div>
-            <a href="https://chessgame1.vercel.app" target="_blank" class="project-view-btn">Click to view project</a>
-          </div>
-        </div>
-        <div class="project-card float-card">
-          <div class="project-header"><h3>Face Recognition System</h3><p class="project-date">Dec 2023 – Jan 2024</p></div>
-          <div class="project-content">
-            <p>Real-time face recognition system using OpenCV and CNN-based deep learning.</p>
-            <div class="project-tags"><span class="tag">Python</span><span class="tag">OpenCV</span><span class="tag">Deep Learning</span></div>
-            <a href="#" class="project-view-btn">Click to view project</a>
-          </div>
-        </div>
-      </div>
-      <div class="more-projects">
-        <a href="project.html" class="btn btn-primary">More Projects →</a>
-      </div>
-    </section>
-
-    <!-- ==================== DATA SCIENCE NOTES (NEW) ==================== -->
-    <section id="notes">
-      <p class="section-label">03 — Knowledge</p>
-      <h2>Data Science Notes</h2>
-      <p class="section-sub">View only · Floating cards · No download</p>
-
-      <div class="notes-grid" id="notesGrid">
-        <!-- Cards will be injected by JS -->
-      </div>
-    </section>
-  </div>
-
-  <!-- CERTIFICATES -->
-  <div class="board-section" id="certificates">
-    <div class="container" style="padding-bottom:0.5rem;">
-      <p class="section-label">04 — Case Board</p>
-      <h2>Certificates</h2>
-      <p class="section-sub">Click any certificate to view — view only, no download.</p>
-    </div>
-    <div class="container">
-      <div class="corkboard">
-        <svg class="string-svg" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M80 80 C 200 40, 350 120, 480 90 S 700 30, 900 100" fill="none" stroke="#c45c4a" stroke-width="4" stroke-linecap="round"/>
-          <path d="M120 220 C 280 180, 400 260, 550 200 S 780 160, 920 240" fill="none" stroke="#c45c4a" stroke-width="3.5" stroke-linecap="round"/>
-        </svg>
-        <div class="board-grid" id="certsGrid">
-          <p class="board-empty">No certificates yet.</p>
-        </div>
-      </div>
-      <div class="board-actions">
-        <button type="button" class="btn btn-secondary" id="adminUnlockBtn">Admin unlock</button>
-        <button type="button" class="btn btn-primary admin-only" id="openCertModal">+ Pin Certificate</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <section id="education">
-      <p class="section-label">05 — Education</p>
-      <h2>Education</h2>
-      <div class="education-item">
-        <h3>Bachelor of Technology in Computer Science Engineering</h3>
-        <p><strong>Poornima University, Jaipur, India</strong></p>
-        <p>Currently Pursuing (2024 – 2028)</p>
-        <p class="highlight">📌 Ranked in top 5% of B.Tech CSE batch</p>
-        <p class="coursework">Relevant Coursework: Data Structures &amp; Algorithms, OOP, Operating Systems, DBMS, Web Development, Python Programming</p>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="contact-section">
-        <p class="section-label" style="margin-bottom:0.35rem;">06 — Contact</p>
-        <h2>Get In Touch</h2>
-        <div class="contact-links">
-          <div class="contact-link"><span>Phone</span><a href=""></a></div>
-          <div class="contact-link"><span>Email</span><a href="mailto:vijeshkumar24242424@gmail.com">vijeshkumar@gmail.com</a></div>
-          <div class="contact-link"><span>GitHub</span><a href="https://github.com/vijeshkumar4545?tab=repositories" target="_blank">Visit GitHub</a></div>
-          <div class="contact-link"><span>LinkedIn</span><a href="https://www.linkedin.com/in/vijesh-kumar-366820350/" target="_blank">Visit LinkedIn</a></div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ========== NOTES VIEWER MODAL ========== -->
-  <div id="notesViewerModal" class="modal viewer-modal">
-    <div class="viewer-box notes-viewer-box">
-      <div class="viewer-top">
-        <h3 id="notesViewerTitle">Data Science Note</h3>
-        <button class="close-btn" data-close="notesViewerModal">×</button>
-      </div>
-      <div class="viewer-body notes-viewer-body" id="notesViewerBody">
-        <!-- iframe / content goes here -->
-      </div>
-      <div class="viewer-meta" id="notesViewerMeta">View only · Download disabled</div>
-    </div>
-  </div>
-
-  <!-- Existing modals (admin, cert, etc.) -->
-  <div id="adminModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Admin unlock</h2>
-        <button class="close-btn" data-close="adminModal">×</button>
-      </div>
-      <form id="adminForm">
-        <div class="form-group">
-          <label for="adminPass">Password</label>
-          <input type="password" id="adminPass" required placeholder="Enter admin password" autocomplete="off">
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">Unlock</button>
-      </form>
-    </div>
-  </div>
-
-  <div id="addCertModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Pin Certificate</h2>
-        <button class="close-btn" data-close="addCertModal">×</button>
-      </div>
-      <form id="certForm">
-        <div class="form-group">
-          <label for="certTitle">Title</label>
-          <input type="text" id="certTitle" required>
-        </div>
-        <div class="form-group">
-          <label for="certOrg">Issued by</label>
-          <input type="text" id="certOrg" required>
-        </div>
-        <div class="form-group">
-          <label for="certDate">Date</label>
-          <input type="text" id="certDate">
-        </div>
-        <div class="form-group">
-          <label>Certificate image</label>
-          <div class="upload-zone" id="uploadZone">
-            <input type="file" id="certFile" accept="image/*">
-            <div class="upload-icon">📁</div>
-            <p>Click to choose image</p>
-            <p class="file-name" id="fileName"></p>
-            <img class="preview-thumb" id="previewThumb" alt="Preview">
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">Pin to board</button>
-      </form>
-    </div>
-  </div>
-
+  <!-- CERT VIEWER -->
   <div id="viewerModal" class="modal viewer-modal">
     <div class="viewer-box">
       <div class="viewer-top">
