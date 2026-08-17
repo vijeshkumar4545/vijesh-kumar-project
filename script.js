@@ -2,7 +2,7 @@
   "use strict";
 
   /* =========================================================
-     PUBLIC CERTIFICATES — everyone sees these
+     PUBLIC CERTIFICATES
      ========================================================= */
   var DEFAULT_CERTS = [
     {
@@ -52,7 +52,6 @@
   (function typewriterLoop() {
     var el = document.getElementById("heroName");
     if (!el) return;
-
     var text = "Vijesh Kumar";
     var i = 0;
     var isDeleting = false;
@@ -64,7 +63,7 @@
         i++;
         if (i === text.length) {
           isDeleting = true;
-          setTimeout(tick, 1800); // pause when fully typed
+          setTimeout(tick, 1800);
           return;
         }
       } else {
@@ -72,13 +71,99 @@
         i--;
         if (i === 0) {
           isDeleting = false;
-          setTimeout(tick, 600); // short pause when empty
+          setTimeout(tick, 600);
           return;
         }
       }
       setTimeout(tick, isDeleting ? 70 : speed);
     }
     tick();
+  })();
+
+  // ----- Skills Orbit (Video-style) -----
+  (function initSkillsOrbit() {
+    var container = document.getElementById("skillsOrbit");
+    if (!container) return;
+
+    // Logos list (Devicon classes + labels)
+    var logos = [
+      { icon: "devicon-unity-original", label: "Unity" },
+      { icon: "devicon-csharp-plain", label: "C#" },
+      { icon: "devicon-android-plain", label: "Android" },
+      { icon: "devicon-python-plain", label: "Python" },
+      { icon: "devicon-javascript-plain", label: "JavaScript" },
+      { icon: "devicon-html5-plain", label: "HTML5" },
+      { icon: "devicon-css3-plain", label: "CSS3" },
+      { icon: "devicon-react-original", label: "React" },
+      { icon: "devicon-git-plain", label: "Git" },
+      { icon: "devicon-github-original", label: "GitHub" },
+      { icon: "devicon-firebase-plain", label: "Firebase" },
+      { icon: "devicon-mysql-plain", label: "MySQL" },
+      { icon: "devicon-java-plain", label: "Java" },
+      { icon: "devicon-kotlin-plain", label: "Kotlin" },
+      { icon: "devicon-bootstrap-plain", label: "Bootstrap" },
+      { icon: "devicon-vscode-plain", label: "VS Code" },
+      { icon: "devicon-figma-plain", label: "Figma" },
+      { icon: "devicon-docker-plain", label: "Docker" },
+      { icon: "devicon-numpy-original", label: "NumPy" },
+      { icon: "devicon-pandas-original", label: "Pandas" },
+      { icon: "devicon-opencv-plain", label: "OpenCV" },
+      { icon: "devicon-tensorflow-original", label: "TensorFlow" },
+      { icon: "devicon-nodejs-plain", label: "Node.js" },
+      { icon: "devicon-typescript-plain", label: "TypeScript" }
+    ];
+
+    // Create logo elements
+    logos.forEach(function (item, index) {
+      var el = document.createElement("div");
+      el.className = "orbit-logo";
+      el.innerHTML = '<i class="' + item.icon + ' colored"></i><span class="logo-label">' + item.label + '</span>';
+      el.title = item.label;
+      container.appendChild(el);
+    });
+
+    var logoEls = container.querySelectorAll(".orbit-logo");
+    var centerX = 0, centerY = 0;
+    var angles = [];
+    var radii = [];
+    var speeds = [];
+
+    // Initialize random-ish positions on different orbits
+    logoEls.forEach(function (el, i) {
+      var orbitIndex = i % 4; // 4 different rings
+      var baseRadius = 110 + orbitIndex * 55;
+      radii.push(baseRadius + (Math.random() * 25 - 12));
+      angles.push((i / logoEls.length) * Math.PI * 2 + Math.random() * 0.4);
+      speeds.push(0.0018 + Math.random() * 0.0022 + (orbitIndex * 0.0004));
+    });
+
+    function resize() {
+      var rect = container.getBoundingClientRect();
+      centerX = rect.width / 2;
+      centerY = rect.height / 2;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    function animate() {
+      logoEls.forEach(function (el, i) {
+        angles[i] += speeds[i];
+        var x = centerX + Math.cos(angles[i]) * radii[i];
+        var y = centerY + Math.sin(angles[i]) * radii[i];
+        el.style.transform = "translate(" + (x - 28) + "px, " + (y - 28) + "px)";
+      });
+      requestAnimationFrame(animate);
+    }
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      requestAnimationFrame(animate);
+    } else {
+      // Static fallback
+      logoEls.forEach(function (el, i) {
+        var x = centerX + Math.cos(angles[i]) * radii[i];
+        var y = centerY + Math.sin(angles[i]) * radii[i];
+        el.style.transform = "translate(" + (x - 28) + "px, " + (y - 28) + "px)";
+      });
+    }
   })();
 
   // ----- Scroll reveal -----
@@ -132,55 +217,6 @@
       }
     });
   });
-
-  // ----- Skills marquee L→R -----
-  var track = document.getElementById("skillsTrack");
-  var marquee = document.getElementById("skillsMarquee");
-  if (track && marquee) {
-    var offset = 0, speed = 0.5, paused = false, dragging = false;
-    var startX = 0, startOff = 0, halfW = 0;
-    function measure() {
-      var cards = track.querySelectorAll(".skill-card");
-      var half = Math.floor(cards.length / 2);
-      if (half < 1) return;
-      halfW = cards[half].getBoundingClientRect().left - cards[0].getBoundingClientRect().left;
-      if (Math.abs(offset) < 1) offset = -halfW * 0.1;
-    }
-    measure();
-    window.addEventListener("resize", measure);
-    function tick() {
-      if (!paused && !dragging && halfW > 0) {
-        offset += speed;
-        if (offset >= 0) offset -= halfW;
-      }
-      track.style.transform = "translateX(" + offset + "px)";
-      requestAnimationFrame(tick);
-    }
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      requestAnimationFrame(tick);
-    }
-    marquee.addEventListener("mouseenter", function () { paused = true; });
-    marquee.addEventListener("mouseleave", function () { if (!dragging) paused = false; });
-    function down(e) {
-      dragging = true; paused = true;
-      startX = e.clientX || (e.touches && e.touches[0].clientX);
-      startOff = offset;
-    }
-    function move(e) {
-      if (!dragging) return;
-      var x = e.clientX || (e.touches && e.touches[0].clientX);
-      offset = startOff + (x - startX);
-      while (offset > 0) offset -= halfW;
-      while (offset < -halfW) offset += halfW;
-    }
-    function up() { dragging = false; paused = false; }
-    marquee.addEventListener("mousedown", down);
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", up);
-    marquee.addEventListener("touchstart", down, { passive: true });
-    window.addEventListener("touchmove", move, { passive: true });
-    window.addEventListener("touchend", up);
-  }
 
   // ----- Admin -----
   function isAdmin() { return sessionStorage.getItem(ADMIN_KEY) === "1"; }
@@ -379,7 +415,7 @@
     if (!g) return;
     var list = allCerts();
     if (!list.length) {
-      g.innerHTML = '<p class="board-empty">No certificates yet. Add them in script.js → DEFAULT_CERTS (see README note).</p>';
+      g.innerHTML = '<p class="board-empty">No certificates yet. Add them in script.js → DEFAULT_CERTS.</p>';
       return;
     }
     g.innerHTML = list.map(function (c, i) {
@@ -387,9 +423,7 @@
       return (
         '<div class="cert-note" style="--rot:' + rots[i % rots.length] + 'deg" data-id="' + c.id + '" data-local="' + (isLocal ? "1" : "0") + '">' +
           '<span class="pin"></span><span class="tape"></span>' +
-          (isLocal
-            ? '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '" title="Delete">✕</button>'
-            : "") +
+          (isLocal ? '<button type="button" class="remove-cert admin-only" data-remove="' + c.id + '" title="Delete">✕</button>' : "") +
           "<h3>" + esc(c.title) + "</h3>" +
           '<p class="cert-org">' + esc(c.org) + "</p>" +
           '<p class="cert-date">' + esc(c.date || "") + "</p>" +
@@ -472,21 +506,7 @@
       certForm.reset();
       resetUpload();
       closeModal("addCertModal");
-      alert(
-        "Pinned on THIS computer only.\n\n" +
-        "To show it to EVERYONE permanently:\n" +
-        "1. Save the certificate image into folder: certificates/\n" +
-        " e.g. certificates/" + title.replace(/\s+/g, "-").toLowerCase() + ".jpg\n" +
-        "2. Open script.js and add inside DEFAULT_CERTS:\n\n" +
-        "{\n" +
-        " id: " + entry.id + ",\n" +
-        " title: \"" + title.replace(/"/g, '\\"') + "\",\n" +
-        " org: \"" + org.replace(/"/g, '\\"') + "\",\n" +
-        " date: \"" + date.replace(/"/g, '\\"') + "\",\n" +
-        " image: \"certificates/your-file-name.jpg\"\n" +
-        "}\n\n" +
-        "Then upload the website files again (with the certificates folder)."
-      );
+      alert("Pinned on THIS computer only.\n\nTo make permanent: save image in certificates/ folder + add to DEFAULT_CERTS in script.js");
     });
   }
 
