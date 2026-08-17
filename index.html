@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vijesh Kumar - Portfolio</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 </head>
 <body>
   <header>
@@ -29,28 +30,22 @@
         <a href="#projects" class="btn btn-secondary">View Projects</a>
       </div>
     </section>
+
     <section id="skills">
       <p class="section-label">01 — Skills</p>
       <h2>Technical Skills</h2>
-      <p class="section-sub">Hover to pause · drag to explore</p>
-      <div class="skills-marquee" id="skillsMarquee">
-        <div class="skills-track" id="skillsTrack">
-          <div class="skill-card"><h3>🎮 Game Development</h3><p>Unity, C# scripting, 2D/3D Game Mechanics, Physics Engine, Game UI Design</p></div>
-          <div class="skill-card"><h3>📱 App Development</h3><p>Android Studio, XML Layouts, Firebase, Java/Kotlin, UI/UX Design</p></div>
-          <div class="skill-card"><h3>💻 Web Development</h3><p>HTML5, CSS3, JavaScript, Responsive Design, Bootstrap</p></div>
-          <div class="skill-card"><h3>🤖 Machine Learning</h3><p>Python, NumPy, Pandas, Scikit-learn, OpenCV, CNN, Deep Learning</p></div>
-          <div class="skill-card"><h3>🗄️ Databases</h3><p>MySQL, SQLite, Database Design &amp; Management</p></div>
-          <div class="skill-card"><h3>🛠️ Tools &amp; Platforms</h3><p>Git &amp; GitHub, VS Code, Figma, Android Studio, Google Colab</p></div>
-          <div class="skill-card" aria-hidden="true"><h3>🎮 Game Development</h3><p>Unity, C# scripting, 2D/3D Game Mechanics, Physics Engine, Game UI Design</p></div>
-          <div class="skill-card" aria-hidden="true"><h3>📱 App Development</h3><p>Android Studio, XML Layouts, Firebase, Java/Kotlin, UI/UX Design</p></div>
-          <div class="skill-card" aria-hidden="true"><h3>💻 Web Development</h3><p>HTML5, CSS3, JavaScript, Responsive Design, Bootstrap</p></div>
-          <div class="skill-card" aria-hidden="true"><h3>🤖 Machine Learning</h3><p>Python, NumPy, Pandas, Scikit-learn, OpenCV, CNN, Deep Learning</p></div>
-          <div class="skill-card" aria-hidden="true"><h3>🗄️ Databases</h3><p>MySQL, SQLite, Database Design &amp; Management</p></div>
-          <div class="skill-card" aria-hidden="true"><h3>🛠️ Tools &amp; Platforms</h3><p>Git &amp; GitHub, VS Code, Figma, Android Studio, Google Colab</p></div>
+      <p class="section-sub">Technologies I work with — continuously orbiting</p>
+      
+      <div class="skills-orbit-wrapper">
+        <div class="skills-orbit" id="skillsOrbit">
+          <!-- Logos injected by JS -->
+        </div>
+        <div class="orbit-center">
+          <span>VK</span>
         </div>
       </div>
-      <p class="skills-hint">Continuous left → right scroll</p>
     </section>
+
     <section id="projects">
       <p class="section-label">02 — Work</p>
       <h2>Featured Projects</h2>
@@ -78,8 +73,8 @@
         <div class="project-card float-card">
           <div class="project-header"><h3>Object Detection</h3><p class="project-date">Jun 2023 – Aug 2023</p></div>
           <div class="project-content">
-            <p>Created an endless runner game with smooth obstacle spawning, power-ups, and scoring system. Implemented responsive controls and optimized gameplay.</p>
-            <div class="project-tags"><span class="tag">Unity</span><span class="tag">Gameplay</span><span class="tag">2D Game</span></div>
+            <p>YOLO based real-time object detection system using Deep Learning and Computer Vision.</p>
+            <div class="project-tags"><span class="tag">Python</span><span class="tag">YOLO</span><span class="tag">OpenCV</span></div>
             <a href="https://vijesh2424-yolo-object-detection.hf.space/" target="_blank" class="project-view-btn">Click to view project</a>
           </div>
         </div>
@@ -117,6 +112,7 @@
       </div>
     </section>
   </div>
+
   <div class="board-section" id="certificates">
     <div class="container" style="padding-bottom:0.5rem;">
       <p class="section-label">03 — Case Board</p>
@@ -139,6 +135,7 @@
       </div>
     </div>
   </div>
+
   <div class="container">
     <section id="education">
       <p class="section-label">04 — Education</p>
@@ -164,6 +161,8 @@
       </div>
     </section>
   </div>
+
+  <!-- Modals (same as before) -->
   <div id="adminModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -241,6 +240,7 @@
       <div class="projects-list" id="customProjects"><p style="text-align:center;color:var(--muted)">No custom projects</p></div>
     </div>
   </div>
+
   <footer>
     <p>&copy; 2024 Vijesh Kumar. All rights reserved. | Building Innovative Solutions</p>
   </footer>
