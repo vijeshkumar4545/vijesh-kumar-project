@@ -3,12 +3,8 @@
 
   /* =========================================================
      PUBLIC CERTIFICATES — everyone sees these
-     1. Put image files in folder:  certificates/your-file.jpg
-     2. Add one object below for each certificate
-     3. image path must match the file name
      ========================================================= */
   var DEFAULT_CERTS = [
-    // EXAMPLE — delete or edit these and add your real ones:
     {
       id: 1,
       title: "Supervised Machine Learning: Regression and Classification",
@@ -44,20 +40,46 @@
       date: "6 Aug 2026",
       image: "certificates/mongoDB.png"
     }
-    // {
-    //   id: 2,
-    //   title: "AI Fundamentals",
-    //   org: "IBM",
-    //   date: "Jul 2025",
-    //   image: "certificates/ai-fundamentals.jpg"
-    // }
   ];
 
-  var ADMIN_PASSWORD = "vijesh10101010"; // change this
+  var ADMIN_PASSWORD = "vijesh10101010";
   var CERT_KEY = "vk_certs_board_v2";
   var ADMIN_KEY = "vk_admin_unlocked";
   var MAX_IMAGE_SIDE = 1400;
   var MAX_DATA_MB = 1.8;
+
+  // ----- Typewriter for "Vijesh Kumar" -----
+  (function typewriterLoop() {
+    var el = document.getElementById("heroName");
+    if (!el) return;
+
+    var text = "Vijesh Kumar";
+    var i = 0;
+    var isDeleting = false;
+    var speed = 120;
+
+    function tick() {
+      if (!isDeleting) {
+        el.textContent = text.substring(0, i + 1);
+        i++;
+        if (i === text.length) {
+          isDeleting = true;
+          setTimeout(tick, 1800); // pause when fully typed
+          return;
+        }
+      } else {
+        el.textContent = text.substring(0, i - 1);
+        i--;
+        if (i === 0) {
+          isDeleting = false;
+          setTimeout(tick, 600); // short pause when empty
+          return;
+        }
+      }
+      setTimeout(tick, isDeleting ? 70 : speed);
+    }
+    tick();
+  })();
 
   // ----- Scroll reveal -----
   var revealEls = document.querySelectorAll("section, .project-card");
@@ -95,7 +117,6 @@
   }
   window.addEventListener("scroll", setActive, { passive: true });
   setActive();
-
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id = a.getAttribute("href");
@@ -190,7 +211,6 @@
     m.classList.remove("open");
     m.style.display = "none";
   }
-
   document.querySelectorAll("[data-close]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       closeModal(btn.getAttribute("data-close"));
@@ -231,7 +251,6 @@
       }
     });
   }
-
   var openCertBtn = document.getElementById("openCertModal");
   if (openCertBtn) {
     openCertBtn.addEventListener("click", function () {
@@ -241,13 +260,12 @@
     });
   }
 
-  // ----- File upload (preview only on this PC — for permanent use code method) -----
+  // ----- File upload -----
   var pendingDataUrl = null;
   var fileInput = document.getElementById("certFile");
   var uploadZone = document.getElementById("uploadZone");
   var fileNameEl = document.getElementById("fileName");
   var previewThumb = document.getElementById("previewThumb");
-
   function resetUpload() {
     pendingDataUrl = null;
     if (fileInput) fileInput.value = "";
@@ -257,7 +275,6 @@
       previewThumb.removeAttribute("src");
     }
   }
-
   function readAndCompress(file, cb) {
     if (!file || !file.type.match(/^image\//)) {
       alert("Please choose an image file (PNG/JPG).");
@@ -297,7 +314,6 @@
     reader.onerror = function () { alert("Could not read file."); };
     reader.readAsDataURL(file);
   }
-
   if (uploadZone && fileInput) {
     uploadZone.addEventListener("click", function () { fileInput.click(); });
     fileInput.addEventListener("change", function () {
@@ -336,11 +352,8 @@
   }
 
   // ----- Certificates -----
-  // Public list = DEFAULT_CERTS (in code, visible to everyone)
-  // localStorage extras = only visible on this browser (admin testing)
   var localCerts = [];
   var rots = [-2.5, 1.8, -1.2, 2.2, -3, 1, -1.8, 2.8];
-
   function loadLocal() {
     try { localCerts = JSON.parse(localStorage.getItem(CERT_KEY) || "[]"); }
     catch (e) { localCerts = []; }
@@ -353,19 +366,14 @@
       throw e;
     }
   }
-
   function allCerts() {
-    // Everyone always sees DEFAULT_CERTS
-    // Admin also sees localStorage pins on this PC
     return DEFAULT_CERTS.concat(localCerts);
   }
-
   function esc(s) {
     var d = document.createElement("div");
     d.textContent = s || "";
     return d.innerHTML;
   }
-
   function renderCerts() {
     var g = document.getElementById("certsGrid");
     if (!g) return;
@@ -389,7 +397,6 @@
         "</div>"
       );
     }).join("");
-
     g.querySelectorAll(".cert-note").forEach(function (note) {
       note.addEventListener("click", function (e) {
         if (e.target.classList.contains("remove-cert")) return;
@@ -410,7 +417,6 @@
       });
     });
   }
-
   function openViewer(c) {
     document.getElementById("viewerTitle").textContent = c.title || "Certificate";
     document.getElementById("viewerMeta").textContent =
@@ -428,12 +434,10 @@
     }
     openModal("viewerModal");
   }
-
   var viewerBody = document.getElementById("viewerBody");
   if (viewerBody) {
     viewerBody.addEventListener("contextmenu", function (e) { e.preventDefault(); });
   }
-
   loadLocal();
   renderCerts();
 
@@ -450,7 +454,6 @@
         alert("Please choose a certificate image first.");
         return;
       }
-      // Local pin (only this browser) + show how to make permanent
       var entry = {
         id: Date.now(),
         title: title,
@@ -469,19 +472,18 @@
       certForm.reset();
       resetUpload();
       closeModal("addCertModal");
-
       alert(
         "Pinned on THIS computer only.\n\n" +
         "To show it to EVERYONE permanently:\n" +
         "1. Save the certificate image into folder: certificates/\n" +
-        "   e.g. certificates/" + title.replace(/\s+/g, "-").toLowerCase() + ".jpg\n" +
+        " e.g. certificates/" + title.replace(/\s+/g, "-").toLowerCase() + ".jpg\n" +
         "2. Open script.js and add inside DEFAULT_CERTS:\n\n" +
         "{\n" +
-        "  id: " + entry.id + ",\n" +
-        "  title: \"" + title.replace(/"/g, '\\"') + "\",\n" +
-        "  org: \"" + org.replace(/"/g, '\\"') + "\",\n" +
-        "  date: \"" + date.replace(/"/g, '\\"') + "\",\n" +
-        "  image: \"certificates/your-file-name.jpg\"\n" +
+        " id: " + entry.id + ",\n" +
+        " title: \"" + title.replace(/"/g, '\\"') + "\",\n" +
+        " org: \"" + org.replace(/"/g, '\\"') + "\",\n" +
+        " date: \"" + date.replace(/"/g, '\\"') + "\",\n" +
+        " image: \"certificates/your-file-name.jpg\"\n" +
         "}\n\n" +
         "Then upload the website files again (with the certificates folder)."
       );
