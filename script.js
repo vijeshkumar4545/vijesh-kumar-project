@@ -80,125 +80,91 @@
     tick();
   })();
 
-// ----- Skills Orbit (3D Spherical style) -----
-(function initSkillsOrbit() {
-  var container = document.getElementById("skillsOrbit");
-  if (!container) return;
+  // ----- Skills Orbit (Video-style) -----
+  (function initSkillsOrbit() {
+    var container = document.getElementById("skillsOrbit");
+    if (!container) return;
 
-  var logos = [
-    { icon: "devicon-unity-original", label: "Unity" },
-    { icon: "devicon-csharp-plain", label: "C#" },
-    { icon: "devicon-android-plain", label: "Android" },
-    { icon: "devicon-python-plain", label: "Python" },
-    { icon: "devicon-javascript-plain", label: "JavaScript" },
-    { icon: "devicon-html5-plain", label: "HTML5" },
-    { icon: "devicon-css3-plain", label: "CSS3" },
-    { icon: "devicon-react-original", label: "React" },
-    { icon: "devicon-git-plain", label: "Git" },
-    { icon: "devicon-github-original", label: "GitHub" },
-    { icon: "devicon-firebase-plain", label: "Firebase" },
-    { icon: "devicon-mysql-plain", label: "MySQL" },
-    { icon: "devicon-java-plain", label: "Java" },
-    { icon: "devicon-kotlin-plain", label: "Kotlin" },
-    { icon: "devicon-bootstrap-plain", label: "Bootstrap" },
-    { icon: "devicon-vscode-plain", label: "VS Code" },
-    { icon: "devicon-figma-plain", label: "Figma" },
-    { icon: "devicon-docker-plain", label: "Docker" },
-    { icon: "devicon-numpy-original", label: "NumPy" },
-    { icon: "devicon-pandas-original", label: "Pandas" },
-    { icon: "devicon-opencv-plain", label: "OpenCV" },
-    { icon: "devicon-tensorflow-original", label: "TensorFlow" },
-    { icon: "devicon-nodejs-plain", label: "Node.js" },
-    { icon: "devicon-typescript-plain", label: "TypeScript" }
-  ];
+    // Logos list (Devicon classes + labels)
+    var logos = [
+      { icon: "devicon-unity-original", label: "Unity" },
+      { icon: "devicon-csharp-plain", label: "C#" },
+      { icon: "devicon-android-plain", label: "Android" },
+      { icon: "devicon-python-plain", label: "Python" },
+      { icon: "devicon-javascript-plain", label: "JavaScript" },
+      { icon: "devicon-html5-plain", label: "HTML5" },
+      { icon: "devicon-css3-plain", label: "CSS3" },
+      { icon: "devicon-react-original", label: "React" },
+      { icon: "devicon-git-plain", label: "Git" },
+      { icon: "devicon-github-original", label: "GitHub" },
+      { icon: "devicon-firebase-plain", label: "Firebase" },
+      { icon: "devicon-mysql-plain", label: "MySQL" },
+      { icon: "devicon-java-plain", label: "Java" },
+      { icon: "devicon-kotlin-plain", label: "Kotlin" },
+      { icon: "devicon-bootstrap-plain", label: "Bootstrap" },
+      { icon: "devicon-vscode-plain", label: "VS Code" },
+      { icon: "devicon-figma-plain", label: "Figma" },
+      { icon: "devicon-docker-plain", label: "Docker" },
+      { icon: "devicon-numpy-original", label: "NumPy" },
+      { icon: "devicon-pandas-original", label: "Pandas" },
+      { icon: "devicon-opencv-plain", label: "OpenCV" },
+      { icon: "devicon-tensorflow-original", label: "TensorFlow" },
+      { icon: "devicon-nodejs-plain", label: "Node.js" },
+      { icon: "devicon-typescript-plain", label: "TypeScript" }
+    ];
 
-  logos.forEach(function (item) {
-    var el = document.createElement("div");
-    el.className = "orbit-logo";
-    el.innerHTML = '<i class="' + item.icon + ' colored"></i><span class="logo-label">' + item.label + '</span>';
-    el.title = item.label;
-    container.appendChild(el);
-  });
+    // Create logo elements
+    logos.forEach(function (item, index) {
+      var el = document.createElement("div");
+      el.className = "orbit-logo";
+      el.innerHTML = '<i class="' + item.icon + ' colored"></i><span class="logo-label">' + item.label + '</span>';
+      el.title = item.label;
+      container.appendChild(el);
+    });
 
-  var logoEls = Array.from(container.querySelectorAll(".orbit-logo"));
-  var angles = [];
-  var radii = [];
-  var speeds = [];
-  var centerX = 0, centerY = 0;
-  var baseRadius = 180;
+    var logoEls = container.querySelectorAll(".orbit-logo");
+    var centerX = 0, centerY = 0;
+    var angles = [];
+    var radii = [];
+    var speeds = [];
 
-  // Initialize
-  logoEls.forEach(function (el, i) {
-    var ring = i % 3; // 3 rings for better sphere feel
-    radii.push(baseRadius * (0.65 + ring * 0.22) + (Math.random() * 18 - 9));
-    angles.push((i / logoEls.length) * Math.PI * 2 + Math.random() * 0.5);
-    speeds.push(0.004 + Math.random() * 0.003 + ring * 0.001);
-  });
+    // Initialize random-ish positions on different orbits
+    logoEls.forEach(function (el, i) {
+      var orbitIndex = i % 4; // 4 different rings
+      var baseRadius = 110 + orbitIndex * 55;
+      radii.push(baseRadius + (Math.random() * 25 - 12));
+      angles.push((i / logoEls.length) * Math.PI * 2 + Math.random() * 0.4);
+      speeds.push(0.0018 + Math.random() * 0.0022 + (orbitIndex * 0.0004));
+    });
 
-  function resize() {
-    var rect = container.getBoundingClientRect();
-    centerX = rect.width / 2;
-    centerY = rect.height / 2;
-
-    // Responsive radius
-    if (window.innerWidth < 640) {
-      baseRadius = Math.min(rect.width, rect.height) * 0.32;
-    } else {
-      baseRadius = Math.min(rect.width, rect.height) * 0.38;
+    function resize() {
+      var rect = container.getBoundingClientRect();
+      centerX = rect.width / 2;
+      centerY = rect.height / 2;
     }
+    resize();
+    window.addEventListener("resize", resize);
 
-    // Update radii based on new base
-    logoEls.forEach(function (el, i) {
-      var ring = i % 3;
-      radii[i] = baseRadius * (0.65 + ring * 0.22) + (Math.random() * 12 - 6);
-    });
-  }
-  resize();
-  window.addEventListener("resize", resize);
-
-  function animate() {
-    logoEls.forEach(function (el, i) {
-      angles[i] += speeds[i];
-
-      // Spherical projection
-      var x = Math.cos(angles[i]) * radii[i];
-      var y = Math.sin(angles[i]) * radii[i] * 0.72; // slightly flattened for nicer look
-
-      // Depth (z) based on angle → front/back
-      var depth = Math.sin(angles[i]); // -1 (back) to +1 (front)
-
-      // Scale: back = small, front = large
-      var scale = 0.55 + (depth + 1) * 0.35; // range ~0.55 → 1.25
-
-      // Opacity: back = dim, front = bright
-      var opacity = 0.25 + (depth + 1) * 0.4; // range ~0.25 → 1.05 (clamped later)
-
-      // z-index so front icons appear on top
-      var zIndex = Math.floor((depth + 1) * 50);
-
-      el.style.transform = 
-        "translate(" + (centerX + x - 28) + "px, " + (centerY + y - 28) + "px) scale(" + scale + ")";
-      el.style.opacity = Math.max(0.22, Math.min(1, opacity));
-      el.style.zIndex = zIndex;
-    });
-    requestAnimationFrame(animate);
-  }
-
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    requestAnimationFrame(animate);
-  } else {
-    // Static fallback
-    logoEls.forEach(function (el, i) {
-      var x = Math.cos(angles[i]) * radii[i];
-      var y = Math.sin(angles[i]) * radii[i] * 0.72;
-      var depth = Math.sin(angles[i]);
-      var scale = 0.55 + (depth + 1) * 0.35;
-      el.style.transform = "translate(" + (centerX + x - 28) + "px, " + (centerY + y - 28) + "px) scale(" + scale + ")";
-      el.style.opacity = 0.25 + (depth + 1) * 0.4;
-    });
-  }
-})();
-  
+    function animate() {
+      logoEls.forEach(function (el, i) {
+        angles[i] += speeds[i];
+        var x = centerX + Math.cos(angles[i]) * radii[i];
+        var y = centerY + Math.sin(angles[i]) * radii[i];
+        el.style.transform = "translate(" + (x - 28) + "px, " + (y - 28) + "px)";
+      });
+      requestAnimationFrame(animate);
+    }
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      requestAnimationFrame(animate);
+    } else {
+      // Static fallback
+      logoEls.forEach(function (el, i) {
+        var x = centerX + Math.cos(angles[i]) * radii[i];
+        var y = centerY + Math.sin(angles[i]) * radii[i];
+        el.style.transform = "translate(" + (x - 28) + "px, " + (y - 28) + "px)";
+      });
+    }
+  })();
 
   // ----- Scroll reveal -----
   var revealEls = document.querySelectorAll("section, .project-card");
