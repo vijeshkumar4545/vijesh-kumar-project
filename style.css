@@ -120,37 +120,50 @@ section h2 {
 .skills-orbit-wrapper {
   position: relative;
   width: 100%;
-  max-width: 720px;
-  height: 520px;
-  margin: 0 auto 2rem;
+  max-width: 780px;
+  height: 540px;
+  margin: 0 auto 2.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 900px; /* helps 3D feel */
 }
+
 .skills-orbit {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(232,168,124,0.04) 0%, transparent 65%);
+  background: radial-gradient(
+    circle at center,
+    rgba(232, 168, 124, 0.07) 0%,
+    rgba(232, 168, 124, 0.02) 40%,
+    transparent 70%
+  );
 }
+
 .orbit-center {
   position: relative;
-  z-index: 5;
-  width: 70px;
-  height: 70px;
+  z-index: 60;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #1f1f24, #141417);
-  border: 2px solid rgba(232,168,124,0.4);
+  background: linear-gradient(145deg, #222228, #141417);
+  border: 2px solid rgba(232, 168, 124, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(232,168,124,0.15);
+  box-shadow: 
+    0 0 40px rgba(232, 168, 124, 0.18),
+    inset 0 0 12px rgba(0,0,0,0.4);
 }
+
 .orbit-center span {
   font-family: var(--serif);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   color: var(--accent);
+  letter-spacing: 0.5px;
 }
+
 .orbit-logo {
   position: absolute;
   top: 0;
@@ -158,29 +171,32 @@ section h2 {
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: rgba(26,26,31,0.9);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(22, 22, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-  transition: transform 0.15s linear, box-shadow 0.3s, border-color 0.3s;
+  gap: 1px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  transition: box-shadow 0.3s, border-color 0.3s;
   cursor: default;
-  will-change: transform;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
+
 .orbit-logo:hover {
-  border-color: rgba(232,168,124,0.5);
-  box-shadow: 0 8px 24px rgba(232,168,124,0.2);
-  z-index: 10;
+  border-color: rgba(232, 168, 124, 0.55);
+  box-shadow: 0 10px 28px rgba(232, 168, 124, 0.25);
 }
+
 .orbit-logo i {
   font-size: 1.55rem;
   line-height: 1;
 }
+
 .orbit-logo .logo-label {
-  font-size: 0.55rem;
+  font-size: 0.52rem;
   color: var(--muted);
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -188,6 +204,49 @@ section h2 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-orbit-wrapper {
+    height: 460px;
+    max-width: 100%;
+  }
+  .orbit-logo {
+    width: 48px;
+    height: 48px;
+  }
+  .orbit-logo i {
+    font-size: 1.3rem;
+  }
+  .orbit-center {
+    width: 62px;
+    height: 62px;
+  }
+  .orbit-center span {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-orbit-wrapper {
+    height: 380px;
+  }
+  .orbit-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+  }
+  .orbit-logo i {
+    font-size: 1.15rem;
+  }
+  .orbit-logo .logo-label {
+    font-size: 0.45rem;
+  }
+  .orbit-center {
+    width: 54px;
+    height: 54px;
+  }
 }
 
 /* ========== PROJECTS ========== */
