@@ -4,7 +4,7 @@
   /* ===================== DATA SCIENCE NOTES ===================== */
   var DEFAULT_NOTES = [
     {
-      id: 1,
+      id: 1
       title: "Python for Data Science",
       topic: "Basics + Pandas + NumPy",
       date: "2025",
