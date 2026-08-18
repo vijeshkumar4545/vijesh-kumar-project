@@ -1,42 +1,6 @@
 (function () {
   "use strict";
 
-  /* ===================== DATA SCIENCE NOTES ===================== */
-  var DEFAULT_NOTES = [
-    {
-      id: 1
-      title: "Python for Data Science",
-      topic: "Basics + Pandas + NumPy",
-      date: "2025",
-      file: "notes/python_for_data_science.html",
-      desc: "Complete notes on Python fundamentals for Data Science"
-    },
-    {
-      id: 2,
-      title: "Machine Learning Algorithms",
-      topic: "Supervised + Unsupervised",
-      date: "2025",
-      file: "notes/ml_algorithms.html",
-      desc: "Regression, Classification, Clustering detailed notes"
-    },
-    {
-      id: 3,
-      title: "Deep Learning with CNN",
-      topic: "Computer Vision",
-      date: "2025",
-      file: "notes/deep_learning_cnn.html",
-      desc: "CNN architecture, Transfer Learning, OpenCV"
-    },
-    {
-      id: 4,
-      title: "Data Visualization",
-      topic: "Matplotlib + Seaborn",
-      date: "2025",
-      file: "notes/data_visualization.html",
-      desc: "Beautiful plots and storytelling with data"
-    }
-  ];
-
   /* ===================== CERTIFICATES ===================== */
   var DEFAULT_CERTS = [
     {
@@ -173,90 +137,8 @@
     }
   })();
 
-  // ========== NOTES (Strict View Only) ==========
-  function renderNotes() {
-    var grid = document.getElementById("notesGrid");
-    if (!grid) return;
-    if (!DEFAULT_NOTES.length) {
-      grid.innerHTML = '<p style="color:var(--muted);text-align:center;">No notes added yet.</p>';
-      return;
-    }
-    grid.innerHTML = DEFAULT_NOTES.map(function (n, i) {
-      return (
-        '<div class="note-card float-card" data-id="' + n.id + '" style="animation-delay:' + (i * 0.12) + 's">' +
-          '<div class="note-icon">📓</div>' +
-          '<h3>' + n.title + '</h3>' +
-          '<p class="note-topic">' + n.topic + '</p>' +
-          '<p class="note-desc">' + (n.desc || "") + '</p>' +
-          '<div class="note-footer">' +
-            '<span class="note-date">' + (n.date || "") + '</span>' +
-            '<span class="view-hint">Click to view →</span>' +
-          '</div>' +
-        '</div>'
-      );
-    }).join("");
-
-    grid.querySelectorAll(".note-card").forEach(function (card) {
-      card.addEventListener("click", function () {
-        var id = Number(card.getAttribute("data-id"));
-        var note = DEFAULT_NOTES.find(function (x) { return x.id === id; });
-        if (note) openNotesViewer(note);
-      });
-    });
-  }
-
-  function openNotesViewer(note) {
-    document.getElementById("notesViewerTitle").textContent = note.title;
-    document.getElementById("notesViewerMeta").textContent =
-      (note.topic || "") + " · " + (note.date || "") + " · View only · Download disabled";
-
-    var body = document.getElementById("notesViewerBody");
-    body.innerHTML = "";
-
-    var protect = document.createElement("div");
-    protect.className = "notes-protect-layer";
-    protect.innerHTML = '<div class="notes-watermark">VIEW ONLY</div>';
-
-    var iframe = document.createElement("iframe");
-    iframe.src = note.file;
-    iframe.className = "notes-iframe";
-    iframe.setAttribute("sandbox", "allow-same-origin allow-scripts");
-    iframe.setAttribute("loading", "lazy");
-
-    body.appendChild(iframe);
-    body.appendChild(protect);
-
-    iframe.onload = function () {
-      try {
-        var doc = iframe.contentDocument || iframe.contentWindow.document;
-        doc.addEventListener("contextmenu", function (e) { e.preventDefault(); });
-        doc.addEventListener("selectstart", function (e) { e.preventDefault(); });
-        doc.body.style.userSelect = "none";
-        doc.body.style.webkitUserSelect = "none";
-      } catch (e) {}
-    };
-
-    openModal("notesViewerModal");
-  }
-
-  // Extra keyboard protection
-  (function () {
-    var modal = document.getElementById("notesViewerModal");
-    if (!modal) return;
-    modal.addEventListener("contextmenu", function (e) { e.preventDefault(); });
-    modal.addEventListener("keydown", function (e) {
-      if (e.ctrlKey && ["s", "p", "c", "a", "u"].includes(e.key.toLowerCase())) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      if (e.key === "F12") e.preventDefault();
-    });
-  })();
-
-  renderNotes();
-
   // ========== SCROLL REVEAL ==========
-  var revealEls = document.querySelectorAll("section, .project-card, .note-card");
+  var revealEls = document.querySelectorAll("section, .project-card");
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
